@@ -30,4 +30,12 @@ sequelize
     console.error('mysql connect is error', err)
   });
 
+// 表同步:没有就新建,有就不变
+sequelize.sync();
+
+// 表同步:没有就新建,有就先删除再新建
+// sequelize.sync({
+//     force: true
+// });	
+
 module.exports = sequelize;

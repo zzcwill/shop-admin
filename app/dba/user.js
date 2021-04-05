@@ -43,12 +43,4 @@ var User = sequelize.define(
   }
 )
 
-// 表同步:没有就新建,有就不变
-// project.sync();
-
-// 表同步:没有就新建,有就先删除再新建
-// project.sync({
-//     force: true
-// });
-
 module.exports = User
