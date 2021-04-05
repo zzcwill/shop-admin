@@ -6,11 +6,9 @@
 var http = require('http');
 var path = require('path');
 var chalk = require('chalk');
-var open = require('open');
 var os = require('os');
 
 var app = require('../app');
-// var debug = require('debug')('dev');
 
 var config = require('config-lite')(path.join(__dirname,'../'));
 
@@ -48,10 +46,6 @@ function onListening() {
   var addr = server.address();
   var port = addr.port;
   
-  // debug('Listening on ' + bind);
-  // if(process.env.NODE_ENV === 'dev') {
-  //   open('http://127.0.0.1:' + bind, {app: ['google chrome', '--incognito']})
-  // }
   console.info(chalk.green('app run on here'));
   console.info(chalk.green(`http://${getIPAdress()}:${port}`));
 }
