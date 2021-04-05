@@ -8,7 +8,7 @@ var path = require('path');
 var chalk = require('chalk');
 var os = require('os');
 
-var app = require('../app');
+var app = require('../app/app');
 
 var config = require('config-lite')(path.join(__dirname,'../'));
 
