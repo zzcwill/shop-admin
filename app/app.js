@@ -19,9 +19,6 @@ var rfs = require('rotating-file-stream');
 var pageRouter = require('./router/page');
 var apiRouter = require('./router/api');
 
-require('../db');
-require('../redis');
-
 var app = express();
 
 app.use(cookieSession({

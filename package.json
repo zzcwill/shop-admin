@@ -8,8 +8,8 @@
     "dev": "cross-env NODE_ENV=dev nodemon ./bin/www",
     "test": "cross-env NODE_ENV=test node ./bin/www",
     "pro": "cross-env NODE_ENV=pro node ./bin/www",
-    "auto": "mocha 'test/*.test.js' --exit",
-    "cover": "nyc --reporter=lcov mocha 'test/*.test.js' --exit",
+    "auto": "cross-env NODE_ENV=dev mocha 'test/*.test.js' --exit",
+    "cover": "cross-env NODE_ENV=dev nyc --reporter=lcov mocha 'test/*.test.js' --exit",
     "lint": "eslint --ext .js",
     "lintfix": "eslint --fix --ext .js"
   },

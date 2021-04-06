@@ -1,6 +1,6 @@
 var path = require('path');
 var assert = require('assert');
-var app = require('../app');
+var app = require('../app/app');
 var request = require('supertest')(app);
 
 describe('# test router api merchant', function () {

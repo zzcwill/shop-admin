@@ -24,7 +24,7 @@ var sequelize = new Sequelize(
 sequelize
   .authenticate()
   .then(() => {
-    console.log('connect to mysql')
+    // console.log('connect to mysql')
   })
   .catch(err => {
     console.error('connect to mysql error, check your mysql config', err)
