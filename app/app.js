@@ -1,3 +1,8 @@
+var config = require('config-lite')(__dirname);
+global.config = config;
+var extend = require('./extend');
+global.extend = extend;
+
 var path = require('path');
 var express = require('express');
 var serveFavicon = require('serve-favicon');
@@ -5,21 +10,23 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
-var config = require('config-lite')(__dirname);
+
 var helmet = require('helmet');
 
 var logger = require('morgan');
 var rfs = require('rotating-file-stream');
-var { getNowDay } = require('./extend/time');
 
 var pageRouter = require('./router/page');
 var apiRouter = require('./router/api');
+
+require('../db');
+require('../redis');
 
 var app = express();
 
 app.use(cookieSession({
   name: 'session',
-  keys: config.cookieSession.keys
+  keys: global.config.cookieSession.keys
 }))
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')))
@@ -35,13 +42,13 @@ app.set('view engine', 'ejs');
 
 //set logs
 var generator = () => {
-  var time = getNowDay();
+  var time = global.extend.dayjs().format('YYYY-MM-DD');
   return `${time}.log`;
 };
 var accessLogStream = rfs.createStream(generator, {
   size: '100M',
   interval: '1d', // rotate daily
-  path: path.join(__dirname, 'logs')
+  path: path.join(__dirname, '../logs/http')
 })
 app.use(logger('combined',{stream:accessLogStream}));
 
@@ -58,7 +65,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-require('./dba');
 
 module.exports = app;

@@ -1,7 +1,7 @@
 // public define(modelName: String, attributes: Object, options: Object): Model
 // modelName：模型名称，自定义	attributes：模型中包含都数据，每一个数据映射对应表中都每一个字段 options：模型（表）的设置
 var Sequelize = require('sequelize');
-var sequelize = require('./db');
+var sequelize = require('../../db');
 const { fn } = require('sequelize');
 
 var User = sequelize.define(

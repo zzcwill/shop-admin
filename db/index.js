@@ -1,6 +1,6 @@
 var path = require('path');
 var Sequelize = require('sequelize');
-var config = require('config-lite')(path.resolve(__dirname, '../'));
+var config = global.config;
 var sequelize = new Sequelize(
 	config.mysqlConfig.client.database, 
 	config.mysqlConfig.client.user, 
@@ -24,18 +24,13 @@ var sequelize = new Sequelize(
 sequelize
   .authenticate()
   .then(() => {
-    console.log('mysql connect')
+    console.log('connect to mysql')
   })
   .catch(err => {
-    console.error('mysql connect is error', err)
+    console.error('connect to mysql error, check your mysql config', err)
   });
 
 // 表同步:没有就新建,有就不变
-sequelize.sync();
-
-// 表同步:没有就新建,有就先删除再新建
-// sequelize.sync({
-//     force: true
-// });	
+// sequelize.sync();
 
 module.exports = sequelize;

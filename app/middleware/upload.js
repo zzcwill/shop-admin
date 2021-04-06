@@ -1,7 +1,6 @@
 var path = require('path');
 var multer  = require('multer');
 var uuid = require('uuid');
-var { getNowDay } = require('../extend/time');
 
 //设置保存规则
 var storage = multer.diskStorage({
@@ -11,7 +10,7 @@ var storage = multer.diskStorage({
   filename: function(req, file, cb) {
       var extName = file.originalname.slice(file.originalname.lastIndexOf('.'));
       var fileName = uuid.v1();
-      var date = getNowDay();
+      var date = global.extend.dayjs().format('YYYY-MM-DD');
       cb(null, fileName + '-' + date + extName);
   }
 })

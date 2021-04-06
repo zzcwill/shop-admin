@@ -1,6 +1,9 @@
 # shop-admin
 > A shop-admin
 
+# mysql
+init.sql
+
 ### 项目运行
 - 全局包安装
 - npm install nodemon -g

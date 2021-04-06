@@ -9,4 +9,6 @@ var resDataApi = (code,data,msg) => {
 	}
 }
 
-exports.resDataApi = resDataApi
+module.exports = {
+	resDataApi
+}

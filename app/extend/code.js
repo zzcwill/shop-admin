@@ -10,4 +10,7 @@ function createCode() {
         fontSize: 60
     });
 }
-exports.createCode = createCode;
+
+module.exports = {
+    createCode
+}

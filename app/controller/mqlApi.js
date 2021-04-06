@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 var { resDataApi } = require('../extend/api');
-var { User } = require('../dba');
+var { User } = require('../model');
 var uuid = require('uuid');
 
 module.exports = {
