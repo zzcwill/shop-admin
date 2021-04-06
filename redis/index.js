@@ -1,6 +1,6 @@
 var config = global.config;
 var Redis = require('ioredis');
-var logger = global.extend.logger;
+var logger = global.help.logger;
 
 var client = new Redis({
   port: config.redisConfig.client.port,

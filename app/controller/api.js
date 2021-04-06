@@ -1,4 +1,4 @@
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 var cacheService = require('../service/cache')
 
 module.exports = {
@@ -12,11 +12,11 @@ module.exports = {
 		var cacheData2 = await cacheService.get(time)
 
 		if (req.query.way === undefined) {
-			data = resDataApi(20000, {}, '没有传way参数');
+			data = resOk(20000, {}, '没有传way参数');
 		}
 
 		if (req.query.way !== undefined) {
-			data = resDataApi(
+			data = resOk(
 				10000,
 				{
 					way: req.query.way,
@@ -31,11 +31,11 @@ module.exports = {
 	postjson: function (req, res, next) {
 		var data = {};
 		if (req.body.way === undefined) {
-			data = resDataApi(20000, {}, '没有传way参数');
+			data = resOk(20000, {}, '没有传way参数');
 		}
 
 		if (req.body.way !== undefined) {
-			data = resDataApi(
+			data = resOk(
 				10000,
 				{
 					way: req.body.way
@@ -49,11 +49,11 @@ module.exports = {
 	postfrom: function (req, res, next) {
 		var data = {};
 		if (req.body.way === undefined) {
-			data = resDataApi(20000, {}, '没有传way参数');
+			data = resOk(20000, {}, '没有传way参数');
 		}
 
 		if (req.body.way !== undefined) {
-			data = resDataApi(
+			data = resOk(
 				10000,
 				{
 					way: req.body.way

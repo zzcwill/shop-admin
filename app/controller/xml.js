@@ -1,6 +1,6 @@
 var xmlbuilder = require('xmlbuilder');
 
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 var obj = {
   root: {
@@ -19,7 +19,7 @@ var xml = xmlbuilder.create(obj).end({ pretty: true});
 
 module.exports = {
 	get: async function (req, res, next) {
-		res.json(resDataApi(10000,{
+		res.json(resOk(10000,{
 			data:xml
 		},'xml传输'))
 	}

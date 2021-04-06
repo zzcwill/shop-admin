@@ -1,8 +1,8 @@
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 module.exports = {
 	get: async function (req, res, next) {
-		res.json(resDataApi(10000,{
+		res.json(resOk(10000,{
 			data: 'csurf'
 		},'csurf-test'))
 	}

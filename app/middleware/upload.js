@@ -10,7 +10,7 @@ var storage = multer.diskStorage({
   filename: function(req, file, cb) {
       var extName = file.originalname.slice(file.originalname.lastIndexOf('.'));
       var fileName = uuid.v1();
-      var date = global.extend.dayjs().format('YYYY-MM-DD');
+      var date = global.help.dayjs().format('YYYY-MM-DD');
       cb(null, fileName + '-' + date + extName);
   }
 })

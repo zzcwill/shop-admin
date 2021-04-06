@@ -1,7 +1,7 @@
 var qs = require('qs');
 var axios = require('axios');
 
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 
 module.exports = {
@@ -31,11 +31,11 @@ module.exports = {
 		});
 
 		if (apidata.data.code !== 10000) {
-			data = resDataApi(20000, {}, apidata.data.message);
+			data = resOk(20000, {}, apidata.data.message);
 		}
 
 		if (apidata.data.code === 10000) {
-			data = resDataApi(
+			data = resOk(
 				10000,
 				apidata.data.data,
 				apidata.data.message || 'ok'

@@ -1,4 +1,5 @@
-var api = require('./api')
+var httpCode = require('./httpCode')
+var resData = require('./resData')
 var code = require('./code')
 
 // 第三方插件
@@ -7,7 +8,8 @@ var dayjs = require('./dayjs')
 var lodash = require('./lodash')
 
 module.exports = {
-	api,
+	httpCode,
+	resData,
 	code,
 
 	logger,

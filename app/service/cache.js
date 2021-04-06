@@ -1,5 +1,5 @@
 var redis  = require('../../redis');
-var logger = global.extend.logger;
+var logger = global.help.logger;
 
 module.exports = {
   get: async (key) => {

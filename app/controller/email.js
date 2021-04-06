@@ -1,7 +1,7 @@
 var mailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 module.exports = {
 	send: async function (req, res, next) {
@@ -29,7 +29,7 @@ module.exports = {
 		});
 
 		if(data) {
-			res.json(resDataApi(10000,{},'邮件-发送成功'))			
+			res.json(resOk(10000,{},'邮件-发送成功'))			
 		}
 	}
 }

@@ -2,7 +2,7 @@ var cheerio = require('cheerio');
 // var qs = require('qs');
 var axios = require('axios');
 
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 module.exports = {
 	get: async function (req, res, next) {
@@ -15,7 +15,7 @@ module.exports = {
 
 		if(apidata.data) {
 			var $ = cheerio.load(apidata.data)
-			res.json(resDataApi(10000,{
+			res.json(resOk(10000,{
 				src: `http://pre-cls.fincs.net/view/${$('.fixedLogoImg').attr('src')}`
 			},'获取百度图片成功'))			
 		}

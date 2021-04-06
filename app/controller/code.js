@@ -1,5 +1,5 @@
 var svgCaptcha = require('svg-captcha');
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 module.exports = {
 	code: function (req, res) {

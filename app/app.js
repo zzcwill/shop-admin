@@ -1,7 +1,9 @@
 var config = require('config-lite')(__dirname);
 global.config = config;
-var extend = require('./extend');
-global.extend = extend;
+var help = require('./help');
+global.help = help;
+var middleware = require('./middleware');
+global.middleware = middleware;
 
 var path = require('path');
 var express = require('express');
@@ -10,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
+var cors = require('cors');
 
 var helmet = require('helmet');
 
@@ -39,7 +42,7 @@ app.set('view engine', 'ejs');
 
 //set logs
 var generator = () => {
-  var time = global.extend.dayjs().format('YYYY-MM-DD');
+  var time = global.help.dayjs().format('YYYY-MM-DD');
   return `${time}.log`;
 };
 var accessLogStream = rfs.createStream(generator, {
@@ -50,17 +53,9 @@ var accessLogStream = rfs.createStream(generator, {
 app.use(logger('combined',{stream:accessLogStream}));
 
 app.use('/', pageRouter);
-app.use('/api', apiRouter);
+app.use('/api', cors(),apiRouter);
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in dev
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'dev' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+  console.info(global.middleware.catchError)
+app.use(global.middleware.catchError)
 
 module.exports = app;

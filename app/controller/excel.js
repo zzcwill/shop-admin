@@ -3,7 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var contentDisposition = require('content-disposition');
 
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 
 
 module.exports = {

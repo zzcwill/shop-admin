@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var { resDataApi } = require('../extend/api');
+var { resOk } = require('../help/resData');
 var { User } = require('../model');
 var uuid = require('uuid');
 
@@ -12,7 +12,7 @@ module.exports = {
 		  salt: 'neirongzzc'
 		});
 
-		res.json(resDataApi(10000,data,'ok'))
+		res.json(resOk(10000,data,'ok'))
 	},
 	delete: async function (req, res, next) {
 		var data = await User.destroy({
@@ -20,7 +20,7 @@ module.exports = {
 				user_name: 'zzc7'
 			}
 		})
-		res.json(resDataApi(10000,data,'ok'));			
+		res.json(resOk(10000,data,'ok'));			
 	},
 	update: async function (req, res, next) {
 		var data = await User.update(
@@ -31,7 +31,7 @@ module.exports = {
 				}
 			}
 		)
-		res.json(resDataApi(10000,data,'ok'));			
+		res.json(resOk(10000,data,'ok'));			
 	},
 	search: async function (req, res, next) {
 		// var data = await User.findByPk(1)
@@ -49,7 +49,7 @@ module.exports = {
 			// limit: 2
 		});
 
-		res.json(resDataApi(10000,{
+		res.json(resOk(10000,{
 			list: rows,
 			total: count
 		},'ok'));  
