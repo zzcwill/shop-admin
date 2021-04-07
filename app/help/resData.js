@@ -11,7 +11,7 @@ const resCodeArr = [
 ]
 
 
-let resOk = (msg = '接口调用成功', code = resCodeArr[0][0], data = {}) => {
+let resOk = (data = {}, code = resCodeArr[0][0], msg = '接口调用成功') => {
   return {
     code,
     data,

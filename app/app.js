@@ -25,7 +25,7 @@ var apiRouter = require('./router/api');
 var app = express();
 
 app.use(cookieSession({
-  name: 'session',
+  name: global.config.cookieSession.name,
   keys: global.config.cookieSession.keys
 }))
 
@@ -53,7 +53,12 @@ var accessLogStream = rfs.createStream(generator, {
 app.use(logger('combined',{stream:accessLogStream}));
 
 app.use('/', pageRouter);
-app.use('/api', cors(),apiRouter);
+app.use('/api', cors(), global.middleware.auth, apiRouter);
+
+app.use((req, res, next) => {
+  var err = new global.help.httpCode.NotFound();
+  next(err);
+});
 
 app.use(global.middleware.catchError)
 

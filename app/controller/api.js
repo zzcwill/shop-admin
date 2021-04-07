@@ -1,5 +1,5 @@
 var { resOk } = require('../help/resData');
-var cacheService = require('../service/cache')
+var cacheService = require('../service/cacheService')
 
 module.exports = {
 	get: async function (req, res, next) {

@@ -1,58 +1,36 @@
 const basicAuth = require('basic-auth')
 const jwt = require('jsonwebtoken')
+const { Forbidden } = global.help.httpCode
+const config = global.config
 
-class Auth {
-  constructor(level) {
-    this.level = level || 1;
+const auth = async (req, res, next) => {
+  const tokenToken = basicAuth(req);
 
-    Auth.USER = 8;
-    Auth.ADMIN = 16;
-    Auth.SPUSER_ADMIN = 32;
+  let errMsg = "无效的token";
+  // 无带token
+  if (!tokenToken || !tokenToken.name) {
+    next( new Forbidden('需要传token') )
   }
 
-  get m() {
-    // token 检测
-    // token 开发者 传递令牌
-    // token body header
-    // HTTP 规定 身份验证机制 HttpBasicAuth
-    return async (ctx, next) => {
-      const tokenToken = basicAuth(ctx.req);
+  try {
+    var decode = jwt.verify(tokenToken.name, config.security.secretKey);
 
-      let errMsg = "无效的token";
-      // 无带token
-      if (!tokenToken || !tokenToken.name) {
-        errMsg = "需要携带token值";
-        throw new global.errs.Forbidden(errMsg);
-      }
-
-      try {
-        var decode = jwt.verify(tokenToken.name, global.config.security.secretKey);
-
-      } catch (error) {
-        // token 不合法 过期
-        if (error.name === 'TokenExpiredError') {
-          errMsg = "token已过期"
-        }
-
-        throw new global.errs.Forbidden(errMsg);
-      }
-
-      if (decode.scope < this.level) {
-        errMsg = "权限不足"
-        throw new global.errs.Forbidden(errMsg);
-      }
-
-      ctx.auth = {
-        uid: decode.uid,
-        scope: decode.scope
-      }
-
-      await next()
+  } catch (error) {
+    // token 不合法 过期
+    if (error.name === 'TokenExpiredError') {
+      errMsg = "token已过期"
     }
+    next( new Forbidden(errMsg) )
   }
 
+  // if (decode.scope < this.level) {
+  //   errMsg = "权限不足"
+  //   throw new global.errs.Forbidden(errMsg);
+  // }
+
+  res.auth = decode
+
+  next()
 }
 
-module.exports = {
-  Auth
-}
+module.exports = auth

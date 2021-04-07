@@ -1,3 +1,5 @@
 var User = require('./user');
 
-exports.User = User;
+module.exports = {
+	User
+}

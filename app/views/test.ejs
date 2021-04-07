@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<!-- <link rel="shortcut icon" href="/images/favicon.ico"/> -->
+	<meta name="viewport" content="width=1240,user-scalable=yes">
+	<meta name="keywords" content="zzc" />
+	<meta name="description" content="zzc" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>
+		<%= title %>
+	</title>
+	<link rel='stylesheet' href='/css/reset.css' />
+	<link rel='stylesheet' href='/css/common.css' />
+	<script src="/js/jquery-1.11.1.min.js"></script>
+</head>
+<style>
+	h1 {
+		margin: 20px auto;
+		text-align: center;
+	}
+
+	h2 {
+		margin: 10px auto;
+		text-align: center;
+	}
+
+	h3 {
+		margin: 10px auto;
+		width: 302px;
+		height: 34px;
+		background-color: #000;
+	}
+</style>
+
+<body>
+	<h1>
+		<%= title %>
+	</h1>
+
+	<h1>接口test</h1>
+	<h2 id="login">登录</h2>
+	<h2 id="logout">注销</h2>
+
+
+	<script>
+		var baseUrl = '/api/'
+		$('#login').bind('click', function () {
+
+			var apiData = {
+				token: '',
+				username: 'zzc',
+				password: 'zzc'
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + 'login',
+				contentType: 'application/json',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
+		})
+		$('#logout').bind('click', function () {
+
+			var apiData = {
+				token: ''
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + 'logout',
+				contentType: 'application/json',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
+		})
+	</script>
+</body>
+
+</html>

@@ -4,6 +4,6 @@ var catchError = require('./catchError')
 
 module.exports ={
 	upload,
-	// auth,
+	auth,
 	catchError
 }

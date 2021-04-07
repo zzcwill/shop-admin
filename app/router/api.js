@@ -19,6 +19,9 @@ var csurfApi = require('../controller/csurfApi');
 
 var mqlApi = require('../controller/mqlApi');
 
+var controller = require('../controller');
+var { userController } = controller
+
 //接口测试
 router.get('/get', api.get);
 router.post('/post/json', api.postjson);
@@ -59,5 +62,10 @@ router.get('/mysql/add', mqlApi.add);
 router.get('/mysql/delete', mqlApi.delete);
 router.get('/mysql/update', mqlApi.update);
 router.get('/mysql/search', mqlApi.search);
+
+
+// user-about
+router.post('/login', userController.login);
+router.post('/logout', userController.logout);
 
 module.exports = router;
