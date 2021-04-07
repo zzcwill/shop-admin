@@ -9,22 +9,54 @@ const { setPassWord, getSalt } = global.help.password;
 
 module.exports = {
 	login: async (req, res, next) => {
-		let getData = {
-			username: req.body.username,
-			password: req.body.password
-		}
+		// let getData = {
+		// 	username: req.body.username,
+		// 	password: req.body.password
+		// }
 
-		// let ruleData = {
-		// 	username: [],
-		// 	password: []
-		// }
-		// let getData = checkParam.check(req, ruleData)
-		// if(msgParam) {
-		// 	let error = new ParameterException(msgParam)
-		// 	next(error)
-		// 	return			
-		// }
-		// return
+		let ruleData = {
+			username: [
+				{
+					msg: 'username必须填',
+					rule: async (val) => {
+						var isOk = true
+						if(!val) {
+							isOk = false 
+						}
+						return isOk
+					}
+				},
+				{
+					msg: 'username长度必须大于2',
+					rule: async (val) => {
+						var isOk = true
+						if(val.length < 3) {
+							isOk = false 
+						}
+						return isOk
+					}
+				},				
+			],
+			password: [
+				{
+					msg: 'password必须填',
+					rule: async (val) => {
+						var isOk = true
+						if(!val) {
+							isOk = false 
+						}
+						return isOk
+					}
+				}				
+			]
+		}
+		let getData = checkParam.check(req, ruleData)
+		let msgParam = 'zzc'
+		if(msgParam) {
+			let error = new ParameterException(msgParam)
+			next(error)
+			return			
+		}
 
 		let user = await userService.getUserByUsername(getData.username);
 

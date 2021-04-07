@@ -1,35 +1,27 @@
-// class Rule {
-//   constructor(name, msg, ...params) {
-//     Object.assign(this, {
-//       name,
-//       msg,
-//       params
-//     })
-//   }
-
-//   validate(field) {
-//     if (this.name == 'isOptional')
-//       return new RuleResult(true)
-//     if (!validator[this.name](field + '', ...this.params)) {
-//       return new RuleResult(false, this.msg || this.message || '参数错误')
-//     }
-//     return new RuleResult(true, '')
-//   }
-// }
-
 let getAllParams = (req) => {
-	console.info(req)
 	return {
 		body: req.body,
 		query: req.query,
-		path: req.params,
-		header: req.header
+		headers: req.headers
 	}
 }
 
-let check = async (req, ruleParm) => {
-	var errorMsg = '';
-	var initParams = getAllParams(req);
+let getRuleDataArr = (ruleData) => {
+	let ruleArr = []
+
+	for (const key in ruleData) {
+		ruleArr[key] = ruleData[key]
+	}
+
+	return ruleArr
+}
+
+let check = async (req, ruleData) => {
+	let errorMsg = '';
+	let initParams = getAllParams(req);
+	let initRuleArr = getRuleDataArr(ruleData);
+	console.info(initParams)
+	console.info(initRuleArr)
 
 	return errorMsg
 
