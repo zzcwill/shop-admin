@@ -11,9 +11,9 @@ const resCodeArr = [
 ]
 
 class HttpException extends Error {
-  constructor(msg = '服务器异常', code = resCodeArr[1][0], status = 400) {
+  constructor(msg = '服务器内部异常', code = resCodeArr[1][0]) {
     super()
-    this.status = status
+    this.status = 400
 		this.code = code
     this.msg = msg
   }

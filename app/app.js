@@ -55,7 +55,6 @@ app.use(logger('combined',{stream:accessLogStream}));
 app.use('/', pageRouter);
 app.use('/api', cors(),apiRouter);
 
-  console.info(global.middleware.catchError)
 app.use(global.middleware.catchError)
 
 module.exports = app;
