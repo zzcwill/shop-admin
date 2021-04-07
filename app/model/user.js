@@ -28,15 +28,15 @@ const User = sequelize.define(
       allowNull: false,
       unique: false // 字段是否UNIQUE
     },		
-    userName: {
-      type: Sequelize.STRING(11),
+    isOnDuty: {
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       // validate: { //模型验证 当前字段值发生改变的时候进行验证
       //   is: ["^[a-z]+$",'i'],     // 只允许字母
       //   not: ["[a-z]",'i'],       // 不能使用字母
       //   isPhone: true
       // },
-      field: 'username' // 数据库中字段的实际名称	
+      field: 'is_on_duty' // 数据库中字段的实际名称	
     }
   },
   {

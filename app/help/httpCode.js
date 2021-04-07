@@ -47,7 +47,7 @@ class Forbidden extends HttpException {
 }
 
 class NotFound extends HttpException {
-  constructor(msg = '请求接口不存在', code = resCodeArr[3][0]) {
+  constructor(msg = '接口不存在', code = resCodeArr[3][0]) {
     super()
     this.status = 404
 		this.code = code

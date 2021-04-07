@@ -1,34 +1,43 @@
-const basicAuth = require('basic-auth')
-const jwt = require('jsonwebtoken')
-const { Forbidden } = global.help.httpCode
-const config = global.config
+const jwt = require('jsonwebtoken');
+const { Forbidden } = global.help.httpCode;
+const config = global.config;
+const cacheService = require('../service/cacheService');
 
 const auth = async (req, res, next) => {
-  const tokenToken = basicAuth(req);
+  if(config.noauthArr.indexOf(req.url) !== -1) {
+    next();
+    return
+  }
 
-  let errMsg = "无效的token";
+  let token = req.body.token;
+
   // 无带token
-  if (!tokenToken || !tokenToken.name) {
-    next( new Forbidden('需要传token') )
+  if (!token) {
+    next( new Forbidden('需要传token') );
+    return
   }
 
-  try {
-    var decode = jwt.verify(tokenToken.name, config.security.secretKey);
+  let tokenCache = await cacheService.get(token);
 
-  } catch (error) {
-    // token 不合法 过期
-    if (error.name === 'TokenExpiredError') {
-      errMsg = "token已过期"
-    }
-    next( new Forbidden(errMsg) )
-  }
+  if(!tokenCache) {
+    next( new Forbidden('无效的token') );
+    return
+  }  
 
-  // if (decode.scope < this.level) {
-  //   errMsg = "权限不足"
-  //   throw new global.errs.Forbidden(errMsg);
+  res.user = tokenCache;
+
+  // try {
+  //   var user = jwt.verify(token, config.security.secretKey);
+
+  // } catch (error) {
+  //   let errMsg = "无效的token";
+  //   // token 不合法 过期
+  //   if (error.name === 'TokenExpiredError') {
+  //     errMsg = "token已过期"
+  //   }
+  //   next( new Forbidden(errMsg) )
+  //   return
   // }
-
-  res.auth = decode
 
   next()
 }

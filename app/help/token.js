@@ -3,7 +3,7 @@ const config = global.config;
 
 
 // 颁布令牌
-const setToken = function (user) {
+const setToken = (user) => {
   const secretKey = config.security.secretKey;
   const expiresIn = config.security.expiresIn;
   const token = jwt.sign(user, secretKey, {
@@ -12,7 +12,7 @@ const setToken = function (user) {
   return token
 }
 
-const getUser = function (token) {
+const getUser = (token) => {
 	var user = jwt.verify(token, config.security.secretKey);
 	return user
 }

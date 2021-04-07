@@ -11,7 +11,7 @@ var catchError = async (err, req, res, next) => {
 
     if (isDev) {
       if(!isHttpException) {
-        throw error;
+        throw err;
       } 
       if (isHttpException) {
         res.status(err.status)

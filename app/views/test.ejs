@@ -48,7 +48,6 @@
 		$('#login').bind('click', function () {
 
 			var apiData = {
-				token: '',
 				username: 'zzc',
 				password: 'zzc'
 			}
@@ -56,7 +55,8 @@
 			$.ajax({
 				type: "post",
 				url: baseUrl + 'login',
-				contentType: 'application/json',
+				contentType: 'application/x-www-form-urlencoded',
+				dataType: "json",
 				data: apiData,
 				success: function (res) {
 					console.log(res);
@@ -68,13 +68,13 @@
 		$('#logout').bind('click', function () {
 
 			var apiData = {
-				token: ''
+				token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoienpjIiwiaXNPbkR1dHkiOjEsImlhdCI6MTYxNzc4OTUwOCwiZXhwIjoxNjE3ODAwMzA4fQ.tpNrjuDA0mG_8I4SLHn56ud2M1kT08RIdxFzelOrbkE"
 			}
 
 			$.ajax({
 				type: "post",
 				url: baseUrl + 'logout',
-				contentType: 'application/json',
+				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {
 					console.log(res);

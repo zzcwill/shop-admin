@@ -51,7 +51,7 @@ CREATE TABLE `user` (
   `username` varchar(40) NOT NULL COMMENT '用户名，现统一为手机号',
   `job_no` varchar(50) DEFAULT NULL COMMENT '工号',
   `user_code` varchar(50) DEFAULT NULL COMMENT '身份证号',
-  `password` varchar(32) NOT NULL COMMENT '密码',
+  `password` varchar(255) NOT NULL COMMENT '密码',
   `salt` varchar(255) NOT NULL COMMENT '密码加密盐值',
   `realname` varchar(255) DEFAULT NULL COMMENT '姓名',
   `phone` varchar(255) DEFAULT NULL COMMENT '手机号',

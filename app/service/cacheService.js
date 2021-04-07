@@ -20,6 +20,13 @@ module.exports = {
     logger.debug('Cache', 'set', key, (duration + 'ms').green);
   },
 
+  del: async (key) =>{
+    var t = Date.now();
+    await redis.del(key);
+    var duration = (Date.now() - t);
+    logger.debug('Cache', 'del', key, (duration + 'ms').green);
+  },
+
   incr :async (key, seconds) => {
     var t = Date.now();
     var result = await redis.multi().incr(key).expire(key, seconds)
