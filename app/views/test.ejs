@@ -41,14 +41,19 @@
 	<h1>接口test</h1>
 	<h2 id="login">登录</h2>
 	<h2 id="logout">注销</h2>
+	<h2 id="userInfo">获取用户信息</h2>
+	<h2 id="createUser">创建用户</h2>
 
 
 	<script>
-		var baseUrl = '/api/'
+		var baseUrl = '/api/';
+		var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsInVzZXJuYW1lIjoienpjMiIsImxldmVsIjpudWxsLCJpc09uRHV0eSI6MSwicmVnaXN0ZXJUaW1lIjoiMjAyMS0wNC0wNyIsImlhdCI6MTYxNzgwMTgyOCwiZXhwIjoxNjE3ODEyNjI4fQ.TQtbA0rqYvgiPGsAOaencMKUfL98leOi89coqpL9Rio';
+
+
 		$('#login').bind('click', function () {
 
 			var apiData = {
-				username: 'zzc',
+				username: 'zzc2',
 				password: 'zzc'
 			}
 
@@ -68,13 +73,52 @@
 		$('#logout').bind('click', function () {
 
 			var apiData = {
-				token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoienpjIiwiaXNPbkR1dHkiOjEsImlhdCI6MTYxNzc4OTUwOCwiZXhwIjoxNjE3ODAwMzA4fQ.tpNrjuDA0mG_8I4SLHn56ud2M1kT08RIdxFzelOrbkE"
+				token: token
 			}
 
 			$.ajax({
 				type: "post",
 				url: baseUrl + 'logout',
 				contentType: 'application/x-www-form-urlencoded',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
+		})
+
+		$('#userInfo').bind('click', function () {
+
+			var apiData = {
+				token: token
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + 'userInfo',
+				contentType: 'application/x-www-form-urlencoded',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
+		})
+		$('#createUser').bind('click', function () {
+			var apiData = {
+				token: token,
+				username: 'zzc3',
+				password: 'zzc'
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + 'createUser',
+				contentType: 'application/x-www-form-urlencoded',
+				dataType: "json",
 				data: apiData,
 				success: function (res) {
 					console.log(res);

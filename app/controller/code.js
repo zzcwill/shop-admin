@@ -1,5 +1,5 @@
 var svgCaptcha = require('svg-captcha');
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 module.exports = {
 	code: function (req, res) {

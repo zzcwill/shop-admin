@@ -8,5 +8,9 @@ module.exports = {
       }
     })
     return user
-  }
+  },
+  createUser: async (user) => {
+    let newUser = await User.create(user)
+    return newUser
+  },
 }

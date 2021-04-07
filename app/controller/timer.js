@@ -1,6 +1,6 @@
 var schedule = require('node-schedule');
 
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 var timercounter = 0
 var timer = null;

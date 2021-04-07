@@ -22,7 +22,7 @@ module.exports = {
 
   del: async (key) =>{
     var t = Date.now();
-    await redis.del(key);
+    await redis.del(key, 1);
     var duration = (Date.now() - t);
     logger.debug('Cache', 'del', key, (duration + 'ms').green);
   },

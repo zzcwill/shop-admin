@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 var { User } = require('../model');
 var uuid = require('uuid');
 

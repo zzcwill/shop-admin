@@ -1,6 +1,6 @@
 var path = require('path');
 var config = require('config-lite')(path.resolve(__dirname, '../'));
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 module.exports = {
 	postmultipart: function(req, res, next) {

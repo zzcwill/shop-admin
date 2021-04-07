@@ -1,7 +1,7 @@
 var mailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 module.exports = {
 	send: async function (req, res, next) {

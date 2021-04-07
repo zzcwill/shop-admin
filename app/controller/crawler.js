@@ -2,7 +2,7 @@ var cheerio = require('cheerio');
 // var qs = require('qs');
 var axios = require('axios');
 
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 module.exports = {
 	get: async function (req, res, next) {

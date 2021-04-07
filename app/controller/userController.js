@@ -1,32 +1,47 @@
-const { resOk } = require('../help/resData');
+const { resOk } = global.help.resData;
 const { userService, cacheService}  = require('../service');
 const { setToken } = global.help.token;
+const checkParam = global.help.checkParam;
 const lodash = global.help.lodash;
 const logger = global.help.logger;
-const { AuthFailed } = global.help.httpCode;
-const { setPassWord } = global.help.password;
+const { AuthFailed, ParameterException } = global.help.httpCode;
+const { setPassWord, getSalt } = global.help.password;
 
 module.exports = {
 	login: async (req, res, next) => {
-		var getData = {
+		let getData = {
 			username: req.body.username,
 			password: req.body.password
 		}
+
+		// let ruleData = {
+		// 	username: [],
+		// 	password: []
+		// }
+		// let getData = checkParam.check(req, ruleData)
+		// if(msgParam) {
+		// 	let error = new ParameterException(msgParam)
+		// 	next(error)
+		// 	return			
+		// }
+		// return
 
 		let user = await userService.getUserByUsername(getData.username);
 
 		if(!user) {
 			let error = new AuthFailed('用户不存在')
 			next(error)
+			return
 		}
 
     let toPassword = setPassWord(getData.password, user.salt);
     if (toPassword !== user.password) {
       let error = new AuthFailed('密码不正确')
       next(error)   
+			return
     }
 
-		let apidata = lodash.pick(user,['uid', 'username', 'isOnDuty'])
+		let apidata = lodash.pick(user, ['uid', 'username', 'level', 'isOnDuty', 'registerTime']);
 
 		let token = setToken(apidata);
 
@@ -40,13 +55,41 @@ module.exports = {
 		let token = req.body.token;
 
 		let tokenCache = await cacheService.get(token)
-		console.info(tokenCache)
 
 		if(tokenCache) {
 			await cacheService.del(token)
-		}	
+		}
 
 
 		res.json(resOk({},10000, '注销成功'))
-	},	
+	},
+	userInfo: async (req, res, next) => {
+	  let apidata = lodash.pick(res.user, ['uid', 'username', 'level', 'isOnDuty', 'registerTime'])
+		res.json(resOk(apidata))		
+	},
+	createUser: async (req, res, next) => {
+		let getData = {
+			username: req.body.username,
+			password: req.body.password
+		}
+
+		let user = await userService.getUserByUsername(getData.username);
+
+		if(user) {
+			let error = new AuthFailed('用户已存在')
+			next(error)
+			return
+		}
+		
+		getData.salt = getSalt()
+		let toPassword = setPassWord(getData.password, getData.salt);
+		getData.password = toPassword;
+
+		// createUser
+		let newUser = await userService.createUser(getData);
+
+		let apidata = lodash.pick(newUser, ['uid', 'username', 'level', 'isOnDuty', 'registerTime']);
+
+		res.json(resOk(apidata, 10000, '创建用户成功'))
+	}
 }

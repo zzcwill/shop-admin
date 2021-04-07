@@ -3,7 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var contentDisposition = require('content-disposition');
 
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 
 module.exports = {

@@ -1,4 +1,4 @@
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 module.exports = {
 	get: async function (req, res, next) {

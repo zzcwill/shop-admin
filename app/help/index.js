@@ -2,6 +2,7 @@ const httpCode = require('./httpCode')
 const resData = require('./resData')
 const token = require('./token')
 const password = require('./password')
+const checkParam = require('./checkParam')
 const code = require('./code')
 
 // 第三方插件
@@ -14,6 +15,7 @@ module.exports = {
 	resData,
 	token,
 	password,
+	checkParam,
 	code,
 
 	logger,

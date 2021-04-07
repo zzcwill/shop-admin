@@ -1,6 +1,6 @@
 var xmlbuilder = require('xmlbuilder');
 
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 var obj = {
   root: {

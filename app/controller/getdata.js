@@ -1,7 +1,7 @@
 var qs = require('qs');
 var axios = require('axios');
 
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 
 
 module.exports = {

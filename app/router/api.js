@@ -67,5 +67,7 @@ router.get('/mysql/search', mqlApi.search);
 // user-about
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
+router.post('/userInfo', userController.userInfo);
+router.post('/createUser', userController.createUser);
 
 module.exports = router;

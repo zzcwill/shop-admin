@@ -1,4 +1,4 @@
-var { resOk } = require('../help/resData');
+var { resOk } = global.help.resData;
 var cacheService = require('../service/cacheService')
 
 module.exports = {

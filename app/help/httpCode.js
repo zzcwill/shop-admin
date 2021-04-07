@@ -13,7 +13,7 @@ const resCodeArr = [
 class HttpException extends Error {
   constructor(msg = '服务器内部异常', code = resCodeArr[1][0]) {
     super()
-    this.status = 400
+    this.status = 200
 		this.code = code
     this.msg = msg
   }
@@ -22,7 +22,7 @@ class HttpException extends Error {
 class ParameterException extends HttpException {
   constructor(msg = '参数错误', code = resCodeArr[1][0]) {
     super()
-    this.status = 400
+    this.status = 200
 		this.code = code
     this.msg = msg
   }
@@ -31,7 +31,7 @@ class ParameterException extends HttpException {
 class AuthFailed extends HttpException {
   constructor(msg = '用户未登录', code = resCodeArr[2][0]) {
     super()
-    this.status = 401
+    this.status = 200
 		this.code = code
     this.msg = msg
   }
@@ -40,7 +40,7 @@ class AuthFailed extends HttpException {
 class Forbidden extends HttpException {
   constructor(msg = 'token失效', code = resCodeArr[2][1]) {
     super()
-    this.status = 403
+    this.status = 200
 		this.code = code
     this.msg = msg
   }
@@ -49,7 +49,7 @@ class Forbidden extends HttpException {
 class NotFound extends HttpException {
   constructor(msg = '接口不存在', code = resCodeArr[3][0]) {
     super()
-    this.status = 404
+    this.status = 200
 		this.code = code
     this.msg = msg
   }

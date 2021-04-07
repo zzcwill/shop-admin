@@ -26,19 +26,6 @@ const auth = async (req, res, next) => {
 
   res.user = tokenCache;
 
-  // try {
-  //   var user = jwt.verify(token, config.security.secretKey);
-
-  // } catch (error) {
-  //   let errMsg = "无效的token";
-  //   // token 不合法 过期
-  //   if (error.name === 'TokenExpiredError') {
-  //     errMsg = "token已过期"
-  //   }
-  //   next( new Forbidden(errMsg) )
-  //   return
-  // }
-
   next()
 }
 
