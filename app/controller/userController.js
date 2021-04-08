@@ -9,16 +9,11 @@ const { setPassWord, getSalt } = global.help.password;
 
 module.exports = {
 	login: async (req, res, next) => {
-		// let getData = {
-		// 	username: req.body.username,
-		// 	password: req.body.password
-		// }
-
 		let ruleData = {
 			username: [
-				{
-					msg: 'username必须填',
-					rule: async (val) => {
+				{	
+					ruleName: 'required',
+					rule: (val) => {
 						var isOk = true
 						if(!val) {
 							isOk = false 
@@ -27,8 +22,9 @@ module.exports = {
 					}
 				},
 				{
+					ruleName: 'minThree',	
 					msg: 'username长度必须大于2',
-					rule: async (val) => {
+					rule: (val) => {
 						var isOk = true
 						if(val.length < 3) {
 							isOk = false 
@@ -39,8 +35,9 @@ module.exports = {
 			],
 			password: [
 				{
+					ruleName: 'required',
 					msg: 'password必须填',
-					rule: async (val) => {
+					rule: (val) => {
 						var isOk = true
 						if(!val) {
 							isOk = false 
@@ -50,13 +47,14 @@ module.exports = {
 				}				
 			]
 		}
-		let getData = checkParam.check(req, ruleData)
-		let msgParam = 'zzc'
+		let msgParam = checkParam.check(req, ruleData)
 		if(msgParam) {
 			let error = new ParameterException(msgParam)
 			next(error)
 			return			
 		}
+
+		let getData = req.body;
 
 		let user = await userService.getUserByUsername(getData.username);
 
