@@ -1,0 +1,401 @@
+/*.fa{z-index: 10}*/
+.flow-img {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    z-index: 99;
+}
+.flow-img img{
+	float: right;
+}
+.pipe{ padding:0 10px;}
+.navBox-main li.nav-btn span:first-child{ cursor: pointer;}
+
+/* 车盛新增图标start */
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.25em;
+  fill: currentColor;
+  overflow: hidden;
+}
+/* 车盛新增图标end */
+
+.nav_title {
+	margin-left: 30px;
+	font-size: 22px;
+	color: #404040;
+	float: left;
+	position: relative;
+	top: 16px;
+}
+
+.navBox-main {
+	margin-top: 26px;
+}
+
+.navBox-main li {
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 19px;
+}
+
+.navBox-main li:first-child {
+	border-right: 1px solid #d9d9d9;
+	padding-right: 38px;
+	margin-right: 19px;
+}
+
+.navBox-main li #userName {
+	font-weight: bold;
+}
+
+.navBox-main li[for='01'] {
+	padding-left: 40px;
+	background: url(../images/common_ic.png) no-repeat -4px -11px
+}
+
+.navBox-main li[for='02'] {
+	padding-left: 40px;
+	background: url(../images/common_ic.png) no-repeat -6px -67px
+}
+
+.navBox-main li[for='03'] {
+	padding-left: 40px;
+	background: url(../images/common_ic.png) no-repeat -4px -119px
+}
+
+.fa {
+	/* font-size: 15px; */
+	font-size: 15px;
+	color: #D4D4D4;
+}
+label.error {
+	display: table-row-group;
+}
+
+.score{
+	width:178px;
+	height:160px;
+	background: url(../images/score_bg.png) no-repeat;
+	position:absolute;
+	top:0;
+	left: 0;
+	margin:155px 0 0 0;
+	margin-left: 25%;
+	display: none;
+}
+
+.score[fors='01']{
+	background-position: -9px -329px;
+}
+
+.score[fors='02']{
+	background-position: -9px -168px;
+}
+
+.score[fors='03']{
+	background-position: -9px -8px;
+}
+
+.score span{
+	font-size: 18px; color:#fff;text-align: center; display: block;margin-top:40px;
+}
+
+.score p{
+	font-size: 50px; color:#fff;text-align: center; display: block;
+}
+.section-title{
+	height: 2em;
+	line-height: 2em;
+	padding: 0 2px;
+	margin: 20px auto;
+	font-size: 14px;
+}
+
+.navbar{
+	margin-bottom: 10px;
+}
+
+.navBox-main{
+	margin-top: 15px; 
+}
+
+/*车商评分*/
+#score .title{
+	font-size: 18px;
+	font-weight: normal;
+	color:#808080;
+}
+.scoreArea .part{
+	border-radius: 6px;
+	overflow: hidden;
+	text-align: center;
+	height: 120px;
+	background-color: #3598db;
+}
+.scoreArea .part.a{
+	background-color:#40cbff;
+}
+.scoreArea .part.zh_score.a .level{
+	color:#40cbff
+}
+.scoreArea .part.b{
+	background-color:#9cd159;
+}
+.scoreArea .part.zh_score.b .level{
+	color:#9cd159;
+}
+.scoreArea .part.c{
+	background-color:#ff5757;
+}
+.scoreArea .part.zh_score.c .level{
+	color:#ff5757;
+}
+.scoreArea .part.d{
+	background-color:#808080;
+}
+.scoreArea .part.zh_score.d .level{
+	color:#808080;
+}
+.scoreArea .s_header{
+	width: 100%;
+	font-size: 14px;
+	color: #fff;
+	background-color:rgba(255,255,255,.2);
+	height: 40px;
+	line-height: 40px;
+}
+.scoreArea .s_body{
+	width: 100%;
+	font-size: 18px;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+}
+.scoreArea .s_footer{
+	width: 100%;
+	font-size: 12px;
+	color: #fff;
+	background-color:rgba(255,255,255,.1);
+	height: 30px;
+	line-height: 30px;
+}
+.scoreArea .level{
+	font-size: 24px;
+	display: inline-block;
+}
+.scoreArea .point{
+	font-size: 30px;
+	display: inline-block;
+}
+.scoreArea .zh_score .s_body{
+	height: 80px;
+	line-height: 30px;
+}
+.scoreArea .zh_score .s_body .level{
+	display: inline-block;
+	background-color: #fff;
+	color: #40cbff;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	margin-top: 25px;
+}
+.scoreArea .score_tip{
+	font-size: 15px;
+	width: 20px;
+	display: inline-block;
+	text-align: center;
+	margin-top: 20px;
+	margin-right: 15px;
+}
+.scoreArea .score_tip.a{
+	border-top: 80px solid #40cbff;
+	margin-left: 20px;
+}
+.scoreArea .score_tip.b{
+	border-top: 80px solid #9cd159;
+}
+.scoreArea .score_tip.c{
+	border-top: 80px solid #ff5757;
+}
+
+.flow-isShowImg{
+	position: absolute;
+	right: 29px;
+	top:26px;
+	z-index: 1;
+}
+.isShowImg {
+	background: url("../images/icon_user.png") no-repeat 0 0;
+	width: 114px;
+	height: 30px;
+	padding:1px 0 0 25px;
+	line-height: 26px;
+	text-align: center;
+	color:#fff;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 5px;
+}
+#isMaritalStatus{ background-position: 0 -31px;}
+.printTable{
+	background: url("../images/icon_print.png") no-repeat 12px center;
+	padding:6px 5px 6px 30px;
+}
+
+.nav-tabs #printBtn:active, .nav-tabs #printBtn:hover{
+	background: url("../images/icon_print.png") no-repeat 12px center;
+}
+
+.navbar .version{
+	margin:15px 0 0 5px;
+	font-size:1em;
+	opacity:0.7;
+	color: #270b0e;
+	line-height:36px;
+}
+
+.page-header {
+	 position: relative;
+}
+.gsh {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+}
+
+
+/* 首页右侧顶部菜单样式start */
+.carNavPointer{
+	cursor: pointer;
+}
+.carNav{
+	margin: 0 -8px 0 -7px;
+	padding: 0 30px;
+	height: 62px;
+	background-color: #5589ff;
+	background-image: linear-gradient(to right, #5589ff, #3673ff);	
+}
+.carNavSystemName{
+	float: left;
+}
+.carNavSystemName .carNavLogo{
+	float: left;
+	margin: 17px 10px 0 0;
+	/* width: 38px;
+	height: 38px; */
+	width: 266px;
+	height: 28px;
+}
+.carNavSystemName .carNavTitle{
+	float: left;
+	line-height: 62px;
+	height: 62px;
+	font-size: 24px;
+	color: #fff;
+}
+.carNavSystemName .carNavTitle span{
+	margin-left: 10px;
+	font-size: 16px;
+	color: #fff;
+}
+
+.carNavSystemFunction{
+	float: right;
+} 
+.carNavSystemFunction .carNavSystemTab{
+	float: left;
+	position: relative;
+	margin-left: 15px;
+}
+.carNavSystemFunction .carNavSystemTab .carNavSystemTabIcon{
+	float: left;
+	margin: 20px 8px 0 0;
+	width: 17px;
+	height: 20px;
+} 
+.carNavSystemFunction .carNavSystemTab .carNavSystemTabIcon2{
+	float: left;
+	margin: 20px 8px 0 0;
+	width: 17px;
+	height: 20px;	
+}
+.carNavSystemFunction .carNavSystemTab .carNavSystemTabName{
+	float: left;
+	font-size: 14px;
+	color: #fff;
+	line-height: 62px;
+}
+.carNavSystemFunction .carNavSystemTab .carNavSystemTabName2{
+	float: left;
+	font-size: 14px;
+	color: #fff;
+	line-height: 62px;
+	margin-right: 30px;
+}
+.carNavSystemFunction .carNavSystemTab .carNavSystemTabIconSelect{
+	float: left;
+	margin:29px 0 0 8px;
+	width: 8px;
+	height: 4px;
+}
+
+/* 下拉小弹窗 */
+.carNavSystemTabPopup{
+	position: absolute;
+	top: 60px;
+	right: -10px;
+	/* padding: 10px 10px; */
+	padding: 20px 0;
+	width: 96px;
+	/* height: 110px; */
+	background-color: #fff;
+	z-index: 999;
+	border:1px solid #eee;
+}
+.carNavSystemTabPopup .carNavTriangle{
+	position: absolute;
+	left: 50%;
+	/* margin-left: -5px; */
+	top: -8px;
+	width: 13px;
+	height: 8px;
+	background: url('../images/index-cs/triangle.png') no-repeat center center;
+}
+.carNavSystemTabPopup .carNavSystemTabPopupUser{
+	margin-bottom: 20px;
+	font-size: 15px;
+	color: #666;
+	line-height: 20px;
+	height: 20px;
+}
+.carNavSystemTabPopup .carNavSystemTabPopupTab{
+	height: 43px;
+	line-height: 42px;
+	color: #999;	
+	/* border-bottom:1px solid #eee; */
+}
+.carNavSystemTabPopupTab:hover{
+	color:#5A8CFF;
+	background-color: #E1ECF7;
+}
+.carNavSystemTabPopup .carNavSystemTabPopupTab .carNavSystemTabPopupTabIcon{
+	float: left;
+	margin: 14px 5px 0 0;
+	width: 14px;
+	height: 14px;
+}
+.carNavSystemTabPopup .carNavSystemTabPopupTab .carNavSystemTabPopupTabName{
+	float: left;
+	font-size: 14px;
+	width: 100%;
+	text-align: center;
+	line-height: 42px;
+}
+
+
+/* 下拉小弹窗 */
+/* 首页右侧顶部菜单样式end */

@@ -1,0 +1,308 @@
+/*清除浮动*/
+.clearfloat:after {
+	content: "020";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfloat {
+	zoom: 1;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+	-webkit-text-fill-color: #5A8CFF;
+}
+
+body{
+	min-width: 1000px;
+}
+
+.loginContainer{
+	margin-left: 600px;
+	min-height: 650px;
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginBg {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: url(../../images/yuntu/bg_login.png) no-repeat center center;
+	background-size: cover;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.loginTop {
+	position: relative;
+	width: 500px;
+	height: 340px;
+	margin-top:-4%;
+	background:white;
+	border:1px solid transparent;
+	border-radius: 5px;
+	box-shadow:0px 4px 10px 0px rgba(51,51,51,0.1);
+	/* background: url(../../images/login-cs/bg2.png) no-repeat center center; */
+}
+.loginTop2{
+	background-image: url(../../images/login-cs/bg3.png);
+}
+
+.loginLeft {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:100%;
+	text-align: center;
+	margin-top:-60px;
+}
+
+.loginLeft .logo {
+	float: left;
+	width: 36px;
+	height: 36px;
+}
+
+.loginLeft .logo img {
+	width: 36px;
+	height: 36px;
+	display: block;
+}
+
+.loginLeft .title {
+	display:flex;
+	align-items: center;
+	float: right;
+	margin-left: 10px;
+	line-height: 36px;
+	height: 36px;
+	color: #fff;
+	font-size: 24px;
+	letter-spacing: 4px;
+}
+
+.loginLeft .title .version {
+	margin-left: 10px;
+	font-size: 14px;
+}
+
+.loginRight {
+	width:100%;
+	border-radius: 2px;
+	height:100%;
+}
+
+.loginRight .login_box {
+	padding: 10px;
+}
+
+.loginRight .codeBox {
+	padding: 30px;
+}
+
+/* 表单 */
+.loginRight span.switch {
+	position: absolute;
+	width: 54px;
+	height: 54px;
+	top: 0;
+	right: 0;
+	background: url(../../images/login-cs/icon-code.png) no-repeat;
+	cursor: pointer;
+	z-index: 500;
+}
+
+.loginRight span.code {
+	background: url(../../images/login-cs/icon-pc.png) no-repeat;
+}
+
+.loginRight .login_box .loginTitle {
+	margin-bottom: 70px;
+	text-align: center;
+	font-size: 26px;
+	line-height: 30px;
+	height: 30px;
+	color: #5A8CFF;
+	letter-spacing:20px
+}
+
+.loginRight .login_box .inputCar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin-bottom: 25px;
+	height: 50px;
+}
+.loginRight .login_box .labelName{
+	/* width:30px; */
+	font-size:16px;
+	color:rgba(51,51,51,1);
+	margin-right:10px;
+	letter-spacing: 5px;
+}
+
+.loginRight .login_box .inputCar .name {
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	width: 24px;
+	height: 23px;
+	background: url(../../images/login-cs/icon-name.png) no-repeat center;
+}
+
+.loginRight .login_box .inputCar .pwd {
+
+	position: absolute;
+	top: 8px;
+	left: 10px;
+
+	width: 22px;
+	height: 24px;
+	background: url(../../images/login-cs/icon-password.png) no-repeat center;
+}
+
+.loginRight .login_box .inputCar input {
+	letter-spacing: 0.4px;
+	font-size: 16px;
+	color: #5A8CFF;
+	height: 50px;
+	width:360px;
+	border:1px solid rgba(233, 233, 233, 1);
+	border-radius:4px;
+	outline: none!important;
+}
+.loginRight .login_box .inputCar .input::-webkit-input-placeholder {
+    color: red!important;
+}
+.loginRight .login_box .inputCar .input:-moz-placeholder {
+    color: red!important;
+}
+.loginRight .login_box .inputCar .input:-ms-input-placeholder {
+    color: red!important;
+}
+
+.loginRight .login_box .check {
+	margin-bottom: 10px;
+	height: 20px;
+}
+
+.loginRight .login_box .check span {
+	float: left;
+	margin-left: 8px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #5A8CFF;
+}
+
+.loginRight .login_box .check i {
+	float: left;
+	margin: 2px 0 0 8px;
+	background: url(../../images/login-cs/select.png) no-repeat center;
+	width: 17px;
+	height: 17px;
+	cursor: pointer;
+}
+
+.loginRight .login_box .check i.cancel {
+	background: url(../../images/login-cs/box.png) no-repeat center;
+}
+
+.loginRight .loginBtn {
+	display: block;
+	outline: none;
+	width: 400px;
+	border: none;
+	height: 50px;
+	border-radius: 4px;
+	line-height: 50px;
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	background-color: #598CFE;
+	letter-spacing:4px;
+	margin-left:40px;
+}
+
+/* .loginBtn:active,
+.loginBtn:hover {
+	background-color: #202E53;
+} */
+
+/* 表单 */
+
+/* 二维码模块 */
+.loginRight .codeBox img {
+	width: 100%;
+	height: 100%;
+}
+
+.loginRight .codeBox p {
+	margin-top: 30px;
+	font-size: 16px;
+	color: #5A8CFF;
+	width: 100%;
+	text-align: center;
+}
+
+/* 二维码 */
+
+/* .loginBottom {
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 400px;
+	height: 42px;
+}
+
+.loginBottom .logo2 {
+	float: left;
+	width: 132px;
+	height: 42px;
+}
+
+.loginBottom .dot22 {
+	float: left;
+	margin: 11px 30px;
+	width: 1px;
+	height: 20px;
+	background-color: #fff;
+}
+
+.loginBottom .phone {
+	float: left;
+	margin-top: 0px;
+	color: #fff;
+	line-height: 42px;
+	height: 42px;
+	font-size: 16px;
+} */
+
+
+.fixedLogo{
+	position: fixed;
+	left: 10%;
+	top: 0;
+	width: 132px;
+	height: 42px;	
+}
+.fixedLogo .fixedLogoImg{
+	display: inline-block;
+	width: 132px;
+	height: 42px;	
+}
+
+ @media (min-width: 1441px) {
+	.loginBottom {
+		margin-top:70px;
+	}
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Expires" CONTENT="0">
+  <meta http-equiv="Cache-Control" CONTENT="no-cache">
+  <meta http-equiv="Pragma" CONTENT="no-cache">
+  <link rel="stylesheet" href="../../../common/plugs/bootstrap-3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../common/css/style.min.css" />
+  <link rel="stylesheet" href="../../../common/plugs/layer/skin/layer.css" />
+  <link rel="stylesheet" href="../../../common/plugs/bootstrap-table/dist/bootstrap-table.min.css">
+  <link rel="stylesheet" href="../../../common/plugs/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="../../../common/plugs/bootstrap-select-1.12.1/dist/css/bootstrap-select.min.css" />
+  <title>角色管理</title>
+</head>
+
+</html>
+
+<body class="gray-bg">
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
+        <div class="ibox float-e-margins">
+          <div class="ibox-content">
+						<div class="page-header">
+							<h3>角色管理</h3>
+						</div>            
+            <form id="searchForm" class="form-horizontal">
+              <div class="form-group form-group-sm">
+                <div class="input-tip">
+                  <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 control-label">角色状态：</label>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <select name="enabled" class="form-control" data-style="btn-white btn-sm">
+                        <option value="">请选择</option>
+                        <option value="1">启用</option>
+                        <option value="0">停用</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="input-tip">
+                  <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 control-label">角色名称：</label>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                    <input type="text" name="roleCode" placeholder="请输入角色名称" class="form-control">
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24 text-center clearfix">
+                  <button type="button" class="btn btn-primary" id="btn-search" modal="enter"><span>&nbsp;查询&nbsp;</span>
+                  </button>&nbsp;&nbsp;
+                  <button type="button" class="btn btn-white" modal="reset" id="clearBtn"><span>&nbsp;清除条件&nbsp;</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="ibox float-e-margins">
+          <div class="ibox-content">
+            <div class="form-group">
+              <div class="col-md-24 col-xs-24 col-sm-24 text-right m-b-10 resource3">
+                <!-- <button class="btn btn-primary m-l-10" id="addRole">新增</button> -->
+              </div>
+            </div>            
+            <table id="table" data-toggle="table" data-height="660" data-ajax="dataLoad_1">
+              <thead>
+                <tr>
+                  <th data-field="roleCode">角色名称</th>
+                  <th data-field="name">角色描述</th>
+                  <th data-field="remark">角色权限</th>
+                  <th data-field="enabled" data-formatter="enabledStr">角色状态</th>
+                  <th data-switchable="false" data-formatter="handle" data-events="tableEvent" data-width="10%">操作
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <div class="modal fade in" id="editRole">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editUserTitle">角色修改</h4>
+        </div>
+        <div class="modal-body">
+            <form id="addRoleForm" class="form-horizontal">
+                    <div class="form-group form-group-sm">
+                        <div class="input-tip">
+                            <input type="hidden" id="id" name="id" class="form-control">
+                        </div>
+                        <div class="input-tip">
+                            <label class="col-md-4 col-xs-4 col-sm-4 control-label">角色名称：</label>
+                            <div class="col-md-10 col-xs-10 col-sm-10">
+                                <input type="text" name="roleCode" id="roleCode" placeholder="请输入角色名称" class="form-control required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                            <div class="input-tip">
+                                  <label class="col-md-4 col-xs-4 col-sm-4 control-label">角色描述：</label>
+                                  <div class="col-md-10 col-xs-10 col-sm-10">
+                                          <input type="text" name="name" placeholder="请输入角色描述" class="form-control required">
+                                  </div>
+                            </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="input-tip">
+                            <label class="col-md-4 col-xs-4 col-sm-4 control-label">角色状态：</label>
+                            <div class="col-md-10 col-xs-10 col-sm-10">
+                                  <select name="enabled" id="enabled" class="form-control required" data-style="btn-white btn-sm">
+                                      <option value="">请选择</option>
+                                      <option value="0">停用</option>
+                                      <option value="1">启用</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="input-tip">
+                            <label class="col-md-4 col-xs-4 col-sm-4 control-label"><span class="text-danger"> *
+                                </span>角色权限：</label>
+                            <div class="col-md-10 col-xs-10 col-sm-10">
+                                <div class="nodes" id="menu" style="max-height:600px;overflow: scroll;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="sureBtn">保存</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../common/js/jquery-2.1.1.min.js"></script>
+<script src="../../../common/plugs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../common/plugs/layer/layer.js"></script>
+<script src="../../../common/plugs/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="../../../common/plugs/jquery-validation/dist/localization/messages_zh.min.js"></script>
+<script src="../../../common/js/jquery.values.js"></script>
+<script src="../../../common/plugs/bootstrap-table/dist/bootstrap-table.min.js"></script>
+<script src="../../../common/plugs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../../common/plugs/bootstrap-select-1.12.1/dist/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+  $("head").append([
+    '<script src="../../../common/js/URL.js"><\/script>',
+    '<script src="../../../common/js/iframeCommon.js"><\/script>',
+    '<script src="../../../js/backManage/role/index.js"><\/script>'
+  ].join(""));
+</script>

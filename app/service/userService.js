@@ -13,4 +13,14 @@ module.exports = {
     let newUser = await User.create(user)
     return newUser
   },
+  changePassword: async (password, uid) => {
+    let isOk = await User.update(
+      password,
+      {
+        //条件
+        where: uid
+      }
+    )
+    return isOk[0]
+  }
 }

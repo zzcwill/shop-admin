@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Expires" CONTENT="0">
+  <meta http-equiv="Cache-Control" CONTENT="no-cache">
+  <meta http-equiv="Pragma" CONTENT="no-cache">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./common/plugs/bootstrap-3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./common/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="./common/css/animate.min.css" />
+  <link rel="stylesheet" href="./common/plugs/layer/skin/layer.css" />
+  <link rel="stylesheet" href="./common/css/style.min.css" />
+  <link rel="stylesheet" href="./common/plugs/jquery-toastr/css/toastr.min.css" />
+  <link rel="stylesheet" href="./css/main.css" />
+  <!-- 菜单图标start -->
+  <script src="./common/fonts-cs/iconfont.js"></script>
+  <!-- 菜单图标end -->
+  <title id="carTitle">云图-大数据风控系统</title>
+  <style>
+    .tip_num {
+      position: absolute;
+      right: 48px;
+      font-style: normal;
+      background: #f00;
+      border-radius: 20px;
+      color: #fff;
+      text-align: center;
+      font-weight: normal;
+      height: 17px;
+      width: 20px;
+      line-height: 17px;
+      font-size: 13px;
+    }
+
+    .tip_num_in {
+      top: 8px;
+      position: absolute;
+      right: 48px;
+      font-style: normal;
+      background: #f00;
+      border-radius: 20px;
+      color: #fff;
+      text-align: center;
+      font-weight: normal;
+      height: 17px;
+      width: 20px;
+      line-height: 17px;
+      font-size: 13px;
+    }
+
+    .mini-navbar .tip_num {
+      right: 0
+    }
+    .messageRemainBox{
+      position: fixed;
+      bottom:-500px;
+      right:20px;
+      width:400px;
+      height:200px;
+      border:1px solid #ccc;
+      background:white;
+      border-radius: 5px;
+    }
+    .messageRemainBox_title{
+      height:45px;
+      border-bottom:1px solid #ccc;
+      padding-left:20px;
+      padding-right:20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .messageRemainBox_body{
+      padding-top:15px;
+      padding-bottom:15px;
+      overflow-y: scroll;
+      height:110px;
+      font-size:16px;
+      display: flex;
+      justify-content: center;
+      padding-left:20px;
+      padding-right:20px;
+    }
+    .messageRemainBox_footer{
+      height:45px;
+      border-top:1px solid #ccc;
+      padding-left:20px;
+      padding-right:20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #notReadNum{
+      color:rgb(104, 104, 252);
+    }
+    .footer_readNum{
+      cursor: pointer;
+      font-size:15px;
+      letter-spacing: 1px;
+    }
+    .MessageAnimationIn{
+      animation: messageIn 2s forwards;
+    }
+    .MessageAnimationOut{
+      animation: messageOut 2s forwards;
+    }
+    @keyframes messageIn {
+      0% {
+        bottom:-500px;
+      }
+      100%{
+        bottom:20px;
+      }
+    }
+    @keyframes messageOut {
+      0% {
+        bottom:20px;
+      }
+      100%{
+        bottom:-500px;
+      }
+    }
+  </style>
+  <script>
+    window.paceOptions = {
+      ajax: {
+          trackWebSockets: false
+      }
+    };
+  </script>  
+</head>
+
+</html>
+
+<body class="fixed-sidebar full-height-layout gray-bg">
+  <div id="wrapper">
+    <nav role="navigation" class="navbar-default navbar-static-side">
+      <div class="sidebar-collapse">
+        <ul id="side-menu" class="nav">
+          <li class="nav-header" style="display: flex;align-items: center;justify-content: center;">
+            <div class="dropdown profile-element text-center">
+              <a href="./Modal/main/index/index.html" data-index="0" class="J_menuItem">
+                <img src="images/yuntu/chesheng logo.png" style="height:34px;" class="logoCompany" id="carLogo">
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- <div class="dislpayArrow"><a href="javascript: void(0);" class="nav-close"></a></div> -->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+      <div id="topNav">
+        <div class="carNav">
+          <div class="carNavSystemName">
+            <img src="./images/yuntu/yuntu logo.png" class="carNavLogo">
+            <div class="carNavTitle">
+              <!-- 云图-大数据风控系统 -->
+              <span id="js_main_version"></span>
+            </div>
+          </div>
+          <div class="carNavSystemFunction">
+            <div class="carNavSystemTab">
+                <!-- <img src="images/index-cs/notice.png" class="carNavSystemTabIcon2">
+                <div class="carNavSystemTabName2 carNavPointer" id="toMessage">
+                  消息
+                </div>                 -->
+                <img src="images/index-cs/user.png" class="carNavSystemTabIcon">
+                <div class="carNavSystemTabName carNavPointer" id="carNavSystemTabSelect2">
+                  <sapn id="userName"></sapn>
+                  <div class="hide" id="account"></div>
+                </div>
+                <img src="images/index-cs/down.png" class="carNavSystemTabIconSelect carNavPointer" id="carNavSystemTabSelect">
+                <div class="carNavSystemTabPopup hide" id="selectPopup">
+                  <div class="carNavTriangle"></div>
+                  <!-- <div class="carNavSystemTabPopupTab">
+                    <img src="images/index-cs/modify.png" class="carNavSystemTabPopupTabIcon">
+                    <div class="carNavSystemTabPopupTabName carNavPointer" id="changeInfo">修&nbsp;改&nbsp;密&nbsp;码</div>
+                  </div> -->
+                  <div class="carNavSystemTabPopupTab">
+                    <!-- <img src="images/index-cs/logout.png" class="carNavSystemTabPopupTabIcon"> -->
+                    <div class="carNavSystemTabPopupTabName J_tabExit carNavPointer">退&nbsp;出&nbsp;登&nbsp;录</div>
+                  </div>                
+                </div>
+              </div> 
+          </div>
+        </div>
+
+        <div class="row content-tabs bg-ff">
+          <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i></button>
+          <nav class="page-tabs J_menuTabs">
+            <div class="page-tabs-content"><a data-id="./Modal/main/index/index.html" class="active J_menuTab">工作台</a>
+            </div>
+          </nav>
+          <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
+          <div class="btn-group roll-nav roll-right">
+            <button data-toggle="dropdown" class="dropdown J_tabClose" style="color: #aab1b8;">
+              关闭操作<span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu dropdown-menu-right">
+              <li class="J_tabShowActive"><a>定位当前选项卡</a></li>
+              <li class="divider">
+              <li class="J_tabCloseAll"> <a>关闭全部选项卡</a></li>
+              </li>
+              <li class="J_tabCloseOther"> <a>关闭其它选项卡</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-main" class="row J_mainContent">
+        <iframe name="iframe0" width="100%" height="100%" src="./Modal/main/index/index.html" frameborder="0"
+          data-id="./Modal/main/index/index.html" seamless class="J_iframe"></iframe>
+      </div>
+    </div>
+  </div>
+  <div id="dialogTip" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button data-dismiss="modal" aria-hidden="true" type="button" class="close">&times;</button>
+          <h4 class="modal-title">提示</h4>
+        </div>
+        <div class="modal-body">
+          <h3 data-name="content">操作成功!</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="logOut" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog modal-dialog2">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button data-dismiss="modal" aria-hidden="true" type="button" class="close">&times;</button>
+          <h4 class="modal-title">退出当前系统</h4>
+        </div>
+        <div class="modal-body">
+          <h4>确定退出当前系统？</h4>
+        </div>
+        <div class="modal-footer">
+          <button id="exitSure" class="btn btn-info">确定</button>
+          <button data-dismiss="modal" class="btn btn-default">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="imageSwitch" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <div style="width: 100%;" class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="height: 40px;">
+          <button data-dismiss="modal" aria-hidden="true" type="button" class="close">&times;</button>
+          <h4 class="modal-title">图片展示</h4>
+        </div>
+        <div class="modal-body" style="padding: 0; margin: 5px;">
+          <div class="jumbotron" style="padding:5px;">
+            <div class="row">
+              <div class="hide" id="picInfo">
+                <div class="ibox float-e-margins">
+                  <div class="ibox-title">图片信息</div>
+                  <div style="height: 600px; overflow: auto;" class="ibox-content">
+                    <template id="guarantorTPL">
+                      <div class="guarantor">
+                        <h5>担保人</h5>
+                        <dl style="margin-left: -50px;" class="dl-horizontal">
+                          <dt>担保人姓名</dt>
+                          <dd data-name="guarantorName">--</dd>
+                          <dt>担保人证件类型</dt>
+                          <dd data-name="guarantorCardType" data-formatter="cardType">--</dd>
+                          <dt>证件号码</dt>
+                          <dd data-name="guarantorCardNo">--</dd>
+                          <dt>年龄</dt>
+                          <dd data-name="guarantorAge">--</dd>
+                        </dl>
+                      </div>
+                    </template>
+                    <div class="coBank">
+                      <dl style="margin-left: -50px;" class="dl-horizontal">
+                        <dt>合作银行</dt>
+                        <dd data-name="coBankName">--</dd>
+                      </dl>
+                    </div>
+                    <div class="customer">
+                      <h5>客户信息</h5>
+                      <dl style="margin-left: -50px;" class="dl-horizontal">
+                        <dt>客户姓名</dt>
+                        <dd data-name="customerName">--</dd>
+                        <dt>身份类型</dt>
+                        <dd data-name="customerCardType">--</dd>
+                        <dt>客户编号</dt>
+                        <dd data-name="customerCardNo">--</dd>
+                        <dt>年龄</dt>
+                        <dd data-name="customerAge">--</dd>
+                        <dt>地址</dt>
+                        <dd data-name="customerVisitAddress">--</dd>
+                        <dt>公司地址</dt>
+                        <dd data-name="customerCompanyName">--</dd>
+                        <dt>公司名称</dt>
+                        <dd data-name="customerCompanyName">--</dd>
+                        <dt>公司电话</dt>
+                        <dd data-name="customerCompanyPhone">--</dd>
+                        <dt>公司地址</dt>
+                        <dd data-name="customerCompanyAddress">--</dd>
+                        <dt>职位</dt>
+                        <dd data-name="customerProfession">--</dd>
+                      </dl>
+                    </div>
+                    <div class="spouse">
+                      <h5>配偶信息</h5>
+                      <dl style="margin-left: -50px;" class="dl-horizontal">
+                        <dt>配偶姓名</dt>
+                        <dd data-name="spouseName">--</dd>
+                        <dt>身份类型</dt>
+                        <dd data-name="spouseCardType">--</dd>
+                        <dt>配偶编号</dt>
+                        <dd data-name="spouseCardNo">--</dd>
+                        <dt>年龄</dt>
+                        <dd data-name="spouseAge">--</dd>
+                        <dt>配偶地址</dt>
+                        <dd data-name="spouseVisitAddress">--</dd>
+                      </dl>
+                    </div>
+                    <div id="guarantor"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-24 col-sm-24 col-md-24" id="picImage">
+                <div class="ibox float-e-margins">
+                  <div class="ibox-title"><span id="dirTitle"></span>(<span id="curImg"></span>/<span
+                      id="totalImg"></span>)</div>
+                  <div style="height: 600px; overflow: hidden; position: relative;" class="ibox-content" id="imgIframe">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="messageRemainBox">
+    <div id="bopInfoId" class="hide"></div>
+    <div id="releaseId" class="hide"></div>
+    <div class="messageRemainBox_title">
+      <div class="messageRemainBox_title_name" style="font-size:18px;font-weight: bold;">系统消息</div>
+      <div class="publishTime" style="font-size:15px;"></div>
+    </div>
+    <div class="messageRemainBox_body">巴拉巴拉
+    </div>
+    <div class="messageRemainBox_footer">
+      <div class="footer_close btn btn-primary btn-sm">关闭</div>
+      <div class="footer_looklook btn btn-primary btn-sm hide">去查看</div>
+      <!-- <div class="footer_readNum"><span id="notReadNum"></span>条未读</div> -->
+      <div class="footer_toHandle btn btn-primary btn-sm">去处理</div>
+    </div>
+  </div>
+</body>
+<script src="./common/js/jquery-2.1.1.min.js"></script>
+<script src="./common/plugs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="./common/plugs/jquery-toastr/js/toastr.min.js"></script>
+<script src="./common/js/jquery.metisMenu.js"></script>
+<script src="./common/js/jquery.slimscroll.min.js"></script>
+<script src="./common/plugs/layer/layer.js"></script>
+<script src="./common/js/tabs.js"></script>
+
+<script src="./common/js/URL.js"></script>
+<script src="./common/js/flowJump.js"></script>
+<!-- <script src="./common/plugs/websocetSDK/message.js"></script>
+<script src="./common/plugs/websocetSDK/replybody.js"></script>
+<script src="./common/plugs/websocetSDK/sentbody.js"></script>
+<script src="./common/plugs/websocetSDK/cim.web.sdk.js"></script> -->
+<script src="js/main.js"></script>

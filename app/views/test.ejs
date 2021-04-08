@@ -43,17 +43,18 @@
 	<h2 id="logout">注销</h2>
 	<h2 id="userInfo">获取用户信息</h2>
 	<h2 id="createUser">创建用户</h2>
+	<h2 id="changePassword">修改密码</h2>
 
 
 	<script>
 		var baseUrl = '/api/';
-		var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsInVzZXJuYW1lIjoienpjMiIsImxldmVsIjpudWxsLCJpc09uRHV0eSI6MSwicmVnaXN0ZXJUaW1lIjoiMjAyMS0wNC0wNyIsImlhdCI6MTYxNzg0OTg2NiwiZXhwIjoxNjE3ODYwNjY2fQ.5fwNdWVzIVmbOUMauiQUj2XN9yn8YAUUbHKuphtKvvA';
+		var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsInVzZXJuYW1lIjoienpjIiwibGV2ZWwiOm51bGwsImlzT25EdXR5IjoxLCJyZWdpc3RlclRpbWUiOiIyMDIxLTA0LTA4IiwiaWF0IjoxNjE3ODY0Njc3LCJleHAiOjE2MTc4NzU0Nzd9.hryi-f_NI9xoMi7gk9zBJ-IjdyuVBDLScPMNJLJhG9A';
 
 
 		$('#login').bind('click', function () {
 
 			var apiData = {
-				username: 'zzc2',
+				username: 'zzc',
 				password: 'zzc'
 			}
 
@@ -110,7 +111,7 @@
 		$('#createUser').bind('click', function () {
 			var apiData = {
 				token: token,
-				username: 'zzc3',
+				username: 'zzc',
 				password: 'zzc'
 			}
 
@@ -127,6 +128,28 @@
 				}
 			});
 		})
+
+		$('#changePassword').bind('click', function () {
+			var apiData = {
+				token: token,
+				password: '123456',
+				newPassword: 'zzc'
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + 'changePassword',
+				contentType: 'application/x-www-form-urlencoded',
+				dataType: "json",
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
+		})
+
 	</script>
 </body>
 

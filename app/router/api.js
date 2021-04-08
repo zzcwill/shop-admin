@@ -69,5 +69,6 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.post('/userInfo', userController.userInfo);
 router.post('/createUser', userController.createUser);
+router.post('/changePassword', userController.changePassword);
 
 module.exports = router;
