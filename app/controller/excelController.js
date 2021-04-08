@@ -1,0 +1,40 @@
+const xlsx = require('node-xlsx').default;
+const path = require('path');
+const fs = require('fs');
+const contentDisposition = require('content-disposition');
+const lodash = global.help.lodash;
+const logger = global.help.logger;
+const { ParameterException } = global.help.httpCode;
+
+const { resOk } = global.help.resData;
+
+
+module.exports = {
+  get: async function (req, res, next) {
+    res.set('Content-Disposition', contentDisposition('excel.xlsx'));
+
+    var url = path.resolve(__dirname, '../public/demo.xlsx');
+
+    var excelData = xlsx.parse(fs.readFileSync(url));
+
+    // console.info(excelData[0].data[0])
+    var data1 = [
+      'zzc', '18042434282', '10', '1000', '2021-02-22'
+    ]
+    var data2 = [
+      'zzc', '18042434282', '10', '1000', '2021-02-22'
+    ]
+
+    excelData[0].data.push(data1);
+    excelData[0].data.push(data2);
+
+    const options = {'!cols': [{ wch: 25 }, { wch: 25 }, { wch: 25 }, { wch: 25 },{ wch: 25 } ]};    
+    var buffer = xlsx.build([{ name: excelData[0].name, data: excelData[0].data }],options);
+    res.end(buffer);
+    
+  },
+  get2: async function (req, res, next) {
+    var url = '/demo.xlsx'
+    res.redirect(url)
+  }
+}

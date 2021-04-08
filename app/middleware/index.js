@@ -1,6 +1,6 @@
-var upload = require('./upload')
-var auth = require('./auth')
-var catchError = require('./catchError')
+const auth = require('./auth')
+const catchError = require('./catchError')
+const upload = require('./upload')
 
 module.exports ={
 	upload,

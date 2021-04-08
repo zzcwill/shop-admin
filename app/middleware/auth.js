@@ -9,7 +9,14 @@ const auth = async (req, res, next) => {
     return
   }
 
-  let token = req.body.token;
+  let token = ''
+  if(req.body.token) {
+    token = req.body.token;
+  }
+
+  if(req.query.token) {
+    token = req.query.token;
+  }
 
   // 无带token
   if (!token) {
