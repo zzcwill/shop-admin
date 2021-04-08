@@ -3,8 +3,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../db');
 
-const Organization = sequelize.define(
-  'organization', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
+const Goods = sequelize.define(
+  'goods', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
   {
     id: {
       type: Sequelize.BIGINT(20), // 字段类型
@@ -12,25 +12,45 @@ const Organization = sequelize.define(
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
-    name: {
-      type: Sequelize.STRING(255),
+    goods_code: {
+      type: Sequelize.STRING(32),
       allowNull: false,
 		},
-    type: {
-      type: Sequelize.STRING(255),
+    goods_price: {
+      type: Sequelize.DECIMAL(24, 2),
       allowNull: false,
 		},
-    parent_id: {
-      type: Sequelize.INTEGER(11),
-      allowNull: true,
-		},
-    short_name: {
-      type: Sequelize.STRING(50),
+    goods_size: {
+      type: Sequelize.STRING(32),
       allowNull: false,
-    }, 
+		},
+    goods_brand: {
+      type: Sequelize.STRING(32),
+      allowNull: false,
+		},
+    goods_color: {
+      type: Sequelize.STRING(32),
+      allowNull: false,
+		},
+    goods_cost_price: {
+      type: Sequelize.DECIMAL(24, 2),
+      allowNull: false,
+		},
+    goods_trade_price: {
+      type: Sequelize.DECIMAL(24, 2),
+      allowNull: false,
+		},
+    create_time : {
+      type: Sequelize. DATE,
+      allowNull: false,
+		},
+    modify_time : {
+      type: Sequelize. DATE,
+      allowNull: false,
+		}								
   },
   {
-    tableName: 'organization', // 手动设置表的实际名称
+    tableName: 'goods', // 手动设置表的实际名称
     timestamps: false, // 是否给每条记录添加 createdAt 和 updatedAt 字段，并在添加新数据和更新数据的时候自动设置这两个字段的值，默认为true
     paranoid: false, // 设置 deletedAt 字段，当删除一条记录的时候，并不是真的销毁记录，而是通过该字段来标示，即保留数据，进行假删除，默认为false
     freezeTableName: false, // 禁用修改表名; 默认情况下，sequelize将自动将所有传递的模型名称（define的第一个参数）转换为复数。 默认为false
@@ -38,4 +58,4 @@ const Organization = sequelize.define(
   }
 )
 
-module.exports = Organization
+module.exports = Goods

@@ -3,41 +3,39 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../db');
 
-
 const Order_goods = sequelize.define(
   'order_goods', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
   {
-    uid: {
-      type: Sequelize.INTEGER(11), // 字段类型
+    id: {
+      type: Sequelize.BIGINT(20), // 字段类型
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
-    username: {
-      type: Sequelize.STRING(11),
+    goods_id: {
+      type: Sequelize.BIGINT(20),
       allowNull: false,
-      unique: true // 字段是否UNIQUE
 		},
-    password: {
-      type: Sequelize.STRING(32),
+    order_id: {
+      type: Sequelize.BIGINT(20),
       allowNull: false,
-      unique: false // 字段是否UNIQUE
-		},    
-    salt: {
-      type: Sequelize.STRING(255),
+		},
+    goods_num: {
+      type: Sequelize.BIGINT(20),
       allowNull: false,
-      unique: false // 字段是否UNIQUE
-    },		
-    isOnDuty: {
-      type: Sequelize.INTEGER(11),
+		},
+    goods_price: {
+      type: Sequelize.DECIMAL(24,2),
       allowNull: false,
-      // validate: { //模型验证 当前字段值发生改变的时候进行验证
-      //   is: ["^[a-z]+$",'i'],     // 只允许字母
-      //   not: ["[a-z]",'i'],       // 不能使用字母
-      //   isPhone: true
-      // },
-      field: 'is_on_duty' // 数据库中字段的实际名称	
-    }
+		},
+    sale_type: {
+      type: Sequelize.STRING(128),
+      allowNull: false,
+		},
+    express_fee : {
+      type: Sequelize.DECIMAL(24,2),
+      allowNull: false,
+		},          
   },
   {
     tableName: 'order_goods', // 手动设置表的实际名称

@@ -37,8 +37,8 @@ CREATE TABLE `sys_menu` (
   `orders` int(4) DEFAULT NULL COMMENT '序号，排序用',
   `logo_tag` varchar(255) DEFAULT NULL COMMENT 'LOGO标识',
   `menu_group` varchar(255) DEFAULT NULL COMMENT '所属按钮组',
-	`modify_time` datetime NOT NULL COMMENT '修改时间',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `note` varchar(1000) DEFAULT NULL COMMENT '说明',
   `level` int(4) DEFAULT NULL COMMENT '保留字段，菜单级别-1,2,3',	
   PRIMARY KEY (`id`),
@@ -86,8 +86,8 @@ CREATE TABLE `role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主ID',
   `name` varchar(255) NOT NULL COMMENT '角色名称',
   `note` varchar(1000) DEFAULT NULL COMMENT '说明',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `role_code` varchar(50) NOT NULL COMMENT '角色编码',
   `status` int(8) NOT NULL COMMENT '使用状态：1启用 0停用',
   PRIMARY KEY (`id`)
@@ -111,8 +111,8 @@ CREATE TABLE `role_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主ID',
   `role_id` int(11) NOT NULL COMMENT '角色ID',
   `menu_id` int(11) NOT NULL COMMENT '菜单ID',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `id_role_id` (`role_id`) USING BTREE,
   KEY `id_menu_id` (`menu_id`) USING BTREE
@@ -127,8 +127,8 @@ CREATE TABLE `code_library` (
   `sort_no` varchar(9) DEFAULT NULL COMMENT '数据字典排序(一般以1开始);也可作他用',
   `describe` varchar(4000) DEFAULT NULL COMMENT '数据字典说明',
   `is_inuse` tinyint(1) NOT NULL COMMENT '是否启用(0-否;1-是)',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `id_code_id` (`code_id`) USING BTREE,
   KEY `id_code_type` (`code_type`) USING BTREE,
@@ -142,8 +142,8 @@ CREATE TABLE `organization` (
   `type` varchar(255) NOT NULL COMMENT '机构类型 company,department,group',
   `parent_id` int(11) NOT NULL COMMENT '上级机构id',
   `note` varchar(1000) DEFAULT NULL COMMENT '说明',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `state` tinyint(1) DEFAULT '0' COMMENT '状态字段 0.未同步 1.同步成功',
   `short_name` varchar(50) DEFAULT NULL COMMENT '机构简称',
   PRIMARY KEY (`id`) USING BTREE,
@@ -158,8 +158,8 @@ CREATE TABLE `file` (
   `file_path` varchar(255) NOT NULL COMMENT '图片url',
   `file_name` varchar(255) DEFAULT NULL COMMENT '文件名',
   `original_name` varchar(255) DEFAULT NULL COMMENT '原文件名',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '录入时间',
-  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `status` int(11) DEFAULT '1' COMMENT '状态：1:启用，0：停用',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '0：未删除，1：已删除',
 
@@ -181,8 +181,8 @@ CREATE TABLE `goods` (
 	`goods_cost_price` decimal(24,2) NOT NULL COMMENT '进货价',
 	`goods_trade_price` decimal(24,2) NOT NULL COMMENT '批发价',
 	`goods_note` varchar(32) NOT NULL COMMENT '描述',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `id_goods_code` (`goods_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品信息表';
@@ -192,8 +192,8 @@ CREATE TABLE `goods_file` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `goods_id` bigint(20) NOT NULL COMMENT '商品id',
 	`file_id` bigint(20) NOT NULL COMMENT '文件id',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `id_goods_id` (`goods_id`) USING BTREE,
   KEY `id_file_id` (`file_id`) USING BTREE
@@ -279,7 +279,7 @@ CREATE TABLE `customer` (
   `habitation_address_detail` varchar(128) DEFAULT NULL COMMENT '邮寄地址详细地址',
   `is_inuse` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用(0:停用;1:启用)',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `id_customer_name` (`customer_name`) USING BTREE COMMENT '唯一索引'
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='客户信息表';
@@ -302,8 +302,8 @@ CREATE TABLE `order` (
 	`pay_status` varchar(16) DEFAULT NULL COMMENT '支付状态 1 未支付  2 支付中 3 已经支付  4 退款中 5 已退款',
 	`order_status` varchar(16) DEFAULT NULL COMMENT '订单状态 1 发起订单 2 订单处理中 3 订单完成',
 	`order_fee` decimal(24,2) DEFAULT NULL COMMENT '订单总费用',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `id_order_code` (`order_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单表';
@@ -317,8 +317,8 @@ CREATE TABLE `order_goods` (
 	`goods_price` decimal(24,2) NOT NULL COMMENT '订单价-实际价格',
 	`sale_type` varchar(128) DEFAULT NULL COMMENT '1零售 2批发',
 	`express_fee` decimal(24,2) DEFAULT NULL COMMENT '快递费',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `modify_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `id_order_id` (`order_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单商品表';

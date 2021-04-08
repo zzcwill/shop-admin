@@ -7,24 +7,26 @@ const Role_menu = require('./role_menu');
 const Code_library = require('./code_library');
 const Organization = require('./organization');
 const File = require('./file');
+const Goods = require('./goods');
 const Goods_file = require('./goods_file');
 const Customer = require('./customer');
 const Order = require('./order');
 const Order_goods = require('./order_goods');
 
 module.exports = {
-	//  Sys,
-	//  Sys_menu,
-	//  User,
-	//  Role,
-	//  User_role,
-	//  Role_menu,
-	//  Code_library,
-	//  Organization,
-	//  File,
-	//  Goods_file,
-	//  Customer,
-	//  Order,
-	//  Order_goods
+	Sys,
+	Sys_menu,
+	User,
+	Role,
+	User_role,
+	Role_menu,
+	Code_library,
+	Organization,
+	File,
+	Goods,
+	Goods_file,
+	Customer,
+	Order,
+	Order_goods,
 	User
 }
