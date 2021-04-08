@@ -16,14 +16,19 @@ const Role = sequelize.define(
       type: Sequelize.STRING(255),
       allowNull: false,
 		},
-    note: {
-      type: Sequelize.STRING(1000),
-      allowNull: true,
-		},    
+    role_code: {
+      type: Sequelize.STRING(255),
+      allowNull: false,
+		},
     status: {
-      type: Sequelize.INTEGER(8),
+      type: Sequelize.TINYINT(11),
+      allowNull: false,
+      defaultValue: 1
+    },    
+    note: {
+      type: Sequelize.STRING(255),
       allowNull: true,
-    }
+		}
   },
   {
     tableName: 'role', // 手动设置表的实际名称

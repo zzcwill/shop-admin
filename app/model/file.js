@@ -7,17 +7,17 @@ const File = sequelize.define(
   'file', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
   {
     id: {
-      type: Sequelize.BIGINT(64), // 字段类型
+      type: Sequelize.INTEGER(11), // 字段类型
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
-      autoIncrement: true, // 是否自增
+      autoIncrement: true
     },
     file_type: {
-      type: Sequelize.STRING(100),
+      type: Sequelize.STRING(255),
       allowNull: false,
 		},
     file_size: {
-      type: Sequelize.BIGINT(30),
+      type: Sequelize.BIGINT(64),
       allowNull: true,
 		},
     file_path: {
@@ -29,7 +29,7 @@ const File = sequelize.define(
       allowNull: true,
 		},
     deleted: {
-      type: Sequelize.TINYINT(128),
+      type: Sequelize.TINYINT(1),
       allowNull: false,
 		}
   },

@@ -12,26 +12,23 @@ const Customer = sequelize.define(
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
-    customer_no: {
-      type: Sequelize.STRING(32),
-      allowNull: true,
-		},
-    customer_name: {
-      type: Sequelize.STRING(32),
+    name: {
+      type: Sequelize.STRING(255),
       allowNull: false,
 		},
-    mobile_phone: {
-      type: Sequelize.STRING(16),
+    phone: {
+      type: Sequelize.STRING(11),
       allowNull: true,
 		},
-    habitation_phone: {
-      type: Sequelize.STRING(32),
-      allowNull: true,
-		},
-    habitation_address_detail: {
+    address: {
       type: Sequelize.STRING(128),
       allowNull: true,
-		}
+		},
+    status: {
+      type: Sequelize.TINYINT(1),
+      allowNull: false,
+      defaultValue: 1      
+    }
   },
   {
     tableName: 'customer', // 手动设置表的实际名称

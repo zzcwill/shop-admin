@@ -16,33 +16,29 @@ const User = sequelize.define(
     username: {
       type: Sequelize.STRING(11),
       allowNull: false,
-      unique: true // 字段是否UNIQUE
+      unique: true // 字段是否UNIQUE     
 		},
     password: {
-      type: Sequelize.STRING(32),
+      type: Sequelize.STRING(255),
       allowNull: false,
-      unique: false // 字段是否UNIQUE
 		},    
     salt: {
       type: Sequelize.STRING(255),
       allowNull: false,
-      unique: false // 字段是否UNIQUE
     },	
     level: {
-      type: Sequelize.INTEGER(4),
+      type: Sequelize.INTEGER(11),
       allowNull: true,
     },	
-    isOnDuty: {
-      type: Sequelize.INTEGER(11),
+    is_on_duty: {
+      type: Sequelize.TINYINT(1),
       allowNull: false,
-      defaultValue: 1,
-      // validate: { //模型验证 当前字段值发生改变的时候进行验证
-      //   is: ["^[a-z]+$",'i'],     // 只允许字母
-      //   not: ["[a-z]",'i'],       // 不能使用字母
-      //   isPhone: true
-      // },
-      field: 'is_on_duty' // 数据库中字段的实际名称	
+      defaultValue: 1
     },
+    last_login_time: {
+      type: Sequelize.DATE,
+      allowNull: true
+    },    
     registerTime: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
@@ -63,10 +59,6 @@ const User = sequelize.define(
       //   unique: true,
       //   fields: ['username']
       // },
-      // {
-      //   unique: false,
-      //   fields: ['status']
-      // }
     ] // 定义表索引
   }
 )

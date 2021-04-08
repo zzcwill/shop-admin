@@ -7,38 +7,38 @@ const Goods = sequelize.define(
   'goods', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
   {
     id: {
-      type: Sequelize.BIGINT(20), // 字段类型
+      type: Sequelize.INTEGER(11), // 字段类型
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
     goods_code: {
-      type: Sequelize.STRING(32),
+      type: Sequelize.STRING(255),
       allowNull: false,
 		},
     goods_price: {
-      type: Sequelize.DECIMAL(24, 2),
-      allowNull: false,
+      type: Sequelize.DECIMAL(10, 2),
+      allowNull: true,
 		},
     goods_size: {
-      type: Sequelize.STRING(32),
-      allowNull: false,
+      type: Sequelize.STRING(255),
+      allowNull: true,
 		},
     goods_brand: {
-      type: Sequelize.STRING(32),
-      allowNull: false,
+      type: Sequelize.STRING(255),
+      allowNull: true,
 		},
     goods_color: {
-      type: Sequelize.STRING(32),
-      allowNull: false,
+      type: Sequelize.STRING(255),
+      allowNull: true,
 		},
     goods_cost_price: {
-      type: Sequelize.DECIMAL(24, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
 		},
     goods_trade_price: {
-      type: Sequelize.DECIMAL(24, 2),
-      allowNull: false,
+      type: Sequelize.DECIMAL(10, 2),
+      allowNull: true,
 		},
     create_time : {
       type: Sequelize. DATE,

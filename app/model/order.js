@@ -7,42 +7,52 @@ const Order = sequelize.define(
   'order', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
   {
     id: {
-      type: Sequelize.BIGINT(20), // 字段类型
+      type: Sequelize.INTEGER(11), // 字段类型
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
     order_code: {
-      type: Sequelize.STRING(20),
+      type: Sequelize.STRING(255),
       allowNull: false,
 		},
     customer_name: {
-      type: Sequelize.STRING(32),
+      type: Sequelize.STRING(255),
       allowNull: false,
 		},
     phone: {
-      type: Sequelize.STRING(16),
+      type: Sequelize.STRING(11),
       allowNull: true,
 		},
-    address_detail: {
-      type: Sequelize.STRING(128),
+    address: {
+      type: Sequelize.STRING(255),
       allowNull: true,
 		},
+
+    sale_type: {
+      type: Sequelize.STRING(256),
+      allowNull: false,
+		},
+    express_fee : {
+      type: Sequelize.DECIMAL(10,2),
+      allowNull: false,
+      defaultValue: 0
+		},    
     pay_type: {
-      type: Sequelize.STRING(16),
+      type: Sequelize.STRING(255),
       allowNull: true,
 		},
     pay_status : {
-      type: Sequelize.STRING(16),
-      allowNull: true,
+      type: Sequelize.STRING(255),
+      allowNull: false,
 		},
     order_status : {
-      type: Sequelize.STRING(16),
+      type: Sequelize.STRING(255),
       allowNull: true,
 		},
     order_fee : {
-      type: Sequelize.STRING(16),
-      allowNull: true,
+      type: Sequelize.STRING(255),
+      allowNull: false,
 		},
     create_time : {
       type: Sequelize. DATE,

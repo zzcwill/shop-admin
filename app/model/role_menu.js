@@ -7,17 +7,17 @@ const Role_menu = sequelize.define(
   'role_menu', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
   {
     id: {
-      type: Sequelize.INTEGER(20), // 字段类型
+      type: Sequelize.INTEGER(11), // 字段类型
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
     role_id: {
-      type: Sequelize.INTEGER(20),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
 		},
     menu_id: {
-      type: Sequelize.INTEGER(20),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
 		}
   },
