@@ -2,7 +2,7 @@
 // modelName：模型名称，自定义	attributes：模型中包含都数据，每一个数据映射对应表中都每一个字段 options：模型（表）的设置
 const Sequelize = require('sequelize');
 const sequelize = require('../../db');
-const { fn } = require('sequelize');
+
 
 const Role = sequelize.define(
   'role', // 默认表名（一般这里写单数）,生成时会自动转换成复数形式。在模型访问时的model.name
