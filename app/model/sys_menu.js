@@ -25,12 +25,8 @@ const Sys_menu = sequelize.define(
       type: Sequelize.INTEGER(11),
       allowNull: true,
 		},
-    business_code: {
-      type: Sequelize.STRING(64),
-      allowNull: true,
-		},
     orders: {
-      type: Sequelize.INTEGER(4),
+      type: Sequelize.INTEGER(11),
       allowNull: true,
 		},
     logo_tag: {
@@ -38,7 +34,7 @@ const Sys_menu = sequelize.define(
       allowNull: true,
 		},
     level: {
-      type: Sequelize.INTEGER(4),
+      type: Sequelize.INTEGER(11),
       allowNull: true,
 		},            
   },

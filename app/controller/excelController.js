@@ -21,12 +21,8 @@ module.exports = {
     var data1 = [
       'zzc', '18042434282', '10', '1000', '2021-02-22'
     ]
-    var data2 = [
-      'zzc', '18042434282', '10', '1000', '2021-02-22'
-    ]
 
     excelData[0].data.push(data1);
-    excelData[0].data.push(data2);
 
     const options = {'!cols': [{ wch: 25 }, { wch: 25 }, { wch: 25 }, { wch: 25 },{ wch: 25 } ]};    
     var buffer = xlsx.build([{ name: excelData[0].name, data: excelData[0].data }],options);

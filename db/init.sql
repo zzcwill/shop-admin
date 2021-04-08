@@ -1,46 +1,14 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : mysql-local
- Source Server Type    : MySQL
- Source Server Version : 80023
- Source Host           : 127.0.0.1:3306
- Source Schema         : shop
-
- Target Server Type    : MySQL
- Target Server Version : 80023
- File Encoding         : 65001
-
- Date: 31/03/2021 14:20:52
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS=0;
-
-DROP TABLE IF EXISTS `sys`;
-CREATE TABLE `sys` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sys_type` varchar(255) DEFAULT NULL,
-  `sys_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='系统表';
-
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主ID',
-  `sys_type` varchar(255) DEFAULT NULL COMMENT '系统类型，默认为shop，以后新加系统以此字段区分',
   `menu_name` varchar(255) DEFAULT NULL COMMENT '菜单名，如 客户管理',
-  `menu_type` varchar(255) DEFAULT NULL COMMENT '菜单类型：URL,BUTTON',
   `url` varchar(255) DEFAULT NULL COMMENT '菜单链接地址',
   `parent_id` int(11) DEFAULT NULL COMMENT '父模块ID',
-  `business_code` varchar(64) DEFAULT NULL COMMENT '同菜单编码',
-  `orders` int(4) DEFAULT NULL COMMENT '序号，排序用',
+  `orders` int(11) DEFAULT NULL COMMENT '序号，排序用',
   `logo_tag` varchar(255) DEFAULT NULL COMMENT 'LOGO标识',
-  `menu_group` varchar(255) DEFAULT NULL COMMENT '所属按钮组',
+  `level` int(11) DEFAULT NULL COMMENT '保留字段，菜单级别-1,2,3',	
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `note` varchar(1000) DEFAULT NULL COMMENT '说明',
-  `level` int(4) DEFAULT NULL COMMENT '保留字段，菜单级别-1,2,3',	
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_business_code` (`business_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';

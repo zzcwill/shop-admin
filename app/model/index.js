@@ -1,4 +1,3 @@
-const Sys = require('./sys');
 const Sys_menu = require('./sys_menu');
 const User = require('./user');
 const Role = require('./role');
@@ -14,7 +13,6 @@ const Order = require('./order');
 const Order_goods = require('./order_goods');
 
 module.exports = {
-	Sys,
 	Sys_menu,
 	User,
 	Role,
