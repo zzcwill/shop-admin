@@ -10,7 +10,7 @@ const File = sequelize.define(
       type: Sequelize.INTEGER(11), // 字段类型
       allowNull: false, // 是否允许为NULL
       primaryKey: true, // 字段是主键
-      autoIncrement: true
+      autoIncrement: true, // 是否自增
     },
     file_type: {
       type: Sequelize.STRING(255),
@@ -31,6 +31,7 @@ const File = sequelize.define(
     deleted: {
       type: Sequelize.TINYINT(1),
       allowNull: false,
+      defaultValue: 0
 		}
   },
   {

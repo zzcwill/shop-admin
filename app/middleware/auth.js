@@ -1,6 +1,6 @@
 const { Forbidden } = global.help.httpCode;
 const config = global.config;
-const cacheService = require('../service/cacheService');
+const { cacheService } = require('../service/');
 
 const auth = async (req, res, next) => {
   if(config.noauthArr.indexOf(req.url) !== -1) {

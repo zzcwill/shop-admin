@@ -9,7 +9,8 @@ let storage = multer.diskStorage({
   //filename：设置文件保存的文件名
   filename: function(req, file, cb) {
       let extName = file.originalname.slice(file.originalname.lastIndexOf('.'));
-      let fileName = uuid.v1();
+      // let fileName = uuid.v1();
+      let fileName = Date.now();
       let date = global.help.dayjs().format('YYYY-MM-DD');
       cb(null, fileName + '-' + date + extName);
   }
@@ -24,15 +25,11 @@ let imageFilter = function(req, file, cb){
       cb(null, false)
   }
 }
-//设置限制（可选）
-let imageLimit = {
-  fieldSize: '2MB'
-}
+
 //创建 multer 实例
 let imgUpload = multer({ 
   storage: storage,
-  fileFilter: imageFilter,
-  limits: imageLimit
-}).single('file', 12)    //定义表单字段、数量限制
+  fileFilter: imageFilter
+}).single('file')    //定义表单字段、数量限制
 
 module.exports = imgUpload

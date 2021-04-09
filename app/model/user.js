@@ -39,14 +39,14 @@ const User = sequelize.define(
       type: Sequelize.DATE,
       allowNull: true
     },    
-    registerTime: {
+    register_time: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
       allowNull: false,
       get() {
         return dayjs( this.getDataValue('registerTime') ).format('YYYY-MM-DD');
       },
-      field: 'register_time' // 数据库中字段的实际名称
+      // field: 'register_time' // 数据库中字段的实际名称
     }
   },
   {

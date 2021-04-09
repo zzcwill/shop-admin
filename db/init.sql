@@ -83,7 +83,7 @@ CREATE TABLE `shop` (
 
 DROP TABLE IF EXISTS `file`;
 CREATE TABLE `file` (
-  `id` int(11) NOT NULL COMMENT '主键id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `file_type` varchar(255) NOT NULL COMMENT '图片类型',
   `file_size` bigint(64) DEFAULT NULL COMMENT '图片大小',
   `file_path` varchar(255) NOT NULL COMMENT '图片url',

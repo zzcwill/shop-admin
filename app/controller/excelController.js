@@ -4,6 +4,7 @@ const fs = require('fs');
 const contentDisposition = require('content-disposition');
 const lodash = global.help.lodash;
 const logger = global.help.logger;
+const checkParam = global.help.checkParam;
 const { ParameterException } = global.help.httpCode;
 
 const { resOk } = global.help.resData;

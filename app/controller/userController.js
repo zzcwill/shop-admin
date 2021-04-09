@@ -4,6 +4,7 @@ const { setToken } = global.help.token;
 const checkParam = global.help.checkParam;
 const lodash = global.help.lodash;
 const logger = global.help.logger;
+const config = global.config;
 const { AuthFailed, ParameterException } = global.help.httpCode;
 const { setPassWord, getSalt } = global.help.password;
 
@@ -64,7 +65,7 @@ module.exports = {
 
 		let token = setToken(apidata);
 
-		await cacheService.set(token, user, 60 * 60 * 3);
+		await cacheService.set(token, user, config.security.expiresIn);
 
 		apidata.token = token
 

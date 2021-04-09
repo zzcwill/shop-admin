@@ -1,8 +1,24 @@
 const path = require('path');
+const fs = require('fs');
 const config = global.config;
 const { resOk } = global.help.resData;
-const { Forbidden } = global.help.httpCode;
-const cacheService = require('../service/cacheService');
+const lodash = global.help.lodash;
+const checkParam = global.help.checkParam;
+const { Forbidden, ParameterException } = global.help.httpCode;
+const { cacheService, imgService } = require('../service');
+
+// 删除文件
+let fsUnlik = async(path) => {
+	return new Promise((resolve, reject) => {
+		fs.unlink(path, (err) => {
+				if (err) {
+					reject(err);
+				}
+				resolve()
+		});
+
+	})
+}
 
 module.exports = {
 	upload: async (req, res, next) => {		
@@ -21,16 +37,29 @@ module.exports = {
 			next( new Forbidden('无效的token') );
 			return
 		}
-		res.user = tokenCache;		
+		res.user = tokenCache;
+
+		let { mimetype, size, filename, path } = req.file;
+
+		if( size > config.uploadOption.maxSize) {
+			await fsUnlik(path)
+			next( new ParameterException('上传图片太大') );
+			return
+		}
+
+		let newImg = {
+			file_type: mimetype,
+			file_size: size,
+			file_path: `${config.hostname}:${config.port}${config.uploadOption.uploadsUrl}${req.file.filename}`,
+			file_name: filename
+		};
+
+		let imgData = await imgService.add(newImg)
+
 
 		if(req.file  !== undefined) {
 			res.json(resOk(
-				{
-					date: global.help.dayjs().format('YYYY-MM-DD'),
-					filename: req.file.filename,
-					originalname: req.file.originalname,
-					url: `${config.hostname}:${config.port}${config.uploadsUrl}${req.file.filename}`
-				},
+				imgData,
 				10000,
 				'图片上传成功'
 			))
