@@ -1,4 +1,6 @@
 const { User }  = require('../model');
+const sequelize = require('../../db');
+const { QueryTypes } = require('sequelize');
 
 module.exports = {
   getUserByUsername: async (username) => {

@@ -1,29 +1,39 @@
-var path = require('path');
-var config = require('config-lite')(path.resolve(__dirname, '../'));
-var { resOk } = global.help.resData;
+const path = require('path');
+const config = global.config;
+const { resOk } = global.help.resData;
+const { Forbidden } = global.help.httpCode;
+const cacheService = require('../service/cacheService');
 
 module.exports = {
-	postmultipart: function(req, res, next) {
-		var data = {};
-	
-		if(req.file  === undefined) {
-			data = resOk(20000,{},'没有上传图片');
+	upload: async (req, res, next) => {		
+		// token校验
+		let token = ''
+		if(req.body.token) {
+			token = req.body.token;
 		}
-	
+		// 无带token
+		if (!token) {
+			next( new Forbidden('需要传token') );
+			return
+		}
+		let tokenCache = await cacheService.get(token);
+		if(!tokenCache) {
+			next( new Forbidden('无效的token') );
+			return
+		}
+		res.user = tokenCache;		
+
 		if(req.file  !== undefined) {
-			data = resOk(
-				10000,
+			res.json(resOk(
 				{
 					date: global.help.dayjs().format('YYYY-MM-DD'),
 					filename: req.file.filename,
 					originalname: req.file.originalname,
-					url: `${config.hostname}:${config.port}${config.uploadsUrl}${req.file.filename}`,
-					way: req.body.way
+					url: `${config.hostname}:${config.port}${config.uploadsUrl}${req.file.filename}`
 				},
-				'ok'
-			);
-		} 
-	
-		res.json(data)
+				10000,
+				'图片上传成功'
+			))
+		}
 	}
 }

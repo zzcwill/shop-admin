@@ -4,6 +4,7 @@ const excelController = require('./excelController');
 const emailController = require('./emailController');
 const menuController = require('./menuController');
 const roleController = require('./roleController');
+const orderController = require('./orderController');
 
 module.exports = {
 	userController,
@@ -11,5 +12,6 @@ module.exports = {
 	excelController,
 	emailController,
 	menuController,
-	roleController
+	roleController,
+	orderController
 }

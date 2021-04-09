@@ -39,38 +39,29 @@
 		<%= title %>
 	</h1>
 
-	<h1>接口test2</h1>
-	<h2 id="upload">文件上传</h2>
-	<h2>
-		<input type="file" name="file" accept="image/*" class="dn" id="upImage">
-	</h2>
+	<h2 id="demo1">订单列表</h2>
 	<br />
-	<h2 id="email">发送邮件</h2>
+	<h2 id="demo2">订单新增</h2>
 	<br />
-	<h2 id="excel">导出excel</h2>
-	<h2 id="excel2">导出excel2</h2>
+	<h2 id="demo3">订单修改</h2>
+	<h2 id="demo4">订单删除</h2>
 	<br />
 
 
 	<script>
-		$('#upload').bind('click', function () {
-			$("#upImage").trigger("click");
-		})
-		$("#upImage").change(function () {
-			var formData = new FormData();
-			var _this = this;
+		$('#demo1').bind('click', function () {
 
-			formData.append('file', _this.files[0]);
-			formData.append('token', token);
-
+			var apiData = {
+				token: token,
+				page: 1,
+				pageSize: 10
+			}
 
 			$.ajax({
 				type: "post",
-				url: baseUrl + "upload",
-				processData: false,
-				contentType: false,
-				// contentType: 'multipart/form-data',
-				data: formData,
+				url: baseUrl + "order/list",
+				contentType: 'application/x-www-form-urlencoded',
+				data: apiData,
 				success: function (res) {
 					console.log(res);
 				},
@@ -78,19 +69,15 @@
 				}
 			});
 		})
-
-
-
-		$('#email').bind('click', function () {
+		$('#demo2').bind('click', function () {
 
 			var apiData = {
 				token: token,
-				title: '邮件test'
 			}
 
 			$.ajax({
 				type: "post",
-				url: baseUrl + "email",
+				url: baseUrl + "order/add",
 				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {
@@ -101,19 +88,44 @@
 			});
 		})
 
-		$('#excel').bind('click', function () {
-			var exportUrl = baseUrl + 'excel';
-			downLink = exportUrl + '?token=' + token;
+		$('#demo3').bind('click', function () {
 
-			window.open(downLink, "_blank");
+			var apiData = {
+				token: token,
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + "order/update",
+				contentType: 'application/x-www-form-urlencoded',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
 		})
 
-		$('#excel2').bind('click', function () {
-			var exportUrl = baseUrl + 'excel2';
-			downLink = exportUrl + '?token=' + token;
+		$('#demo3').bind('click', function () {
 
-			window.open(downLink, "_blank");
+			var apiData = {
+				token: token,
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + "order/delete",
+				contentType: 'application/x-www-form-urlencoded',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
 		})
+
 
 	</script>
 </body>

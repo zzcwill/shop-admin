@@ -1,4 +1,4 @@
-const { Role, User_role }  = require('../model');
+const { Role }  = require('../model');
 const sequelize = require('../../db');
 const { QueryTypes } = require('sequelize');
 

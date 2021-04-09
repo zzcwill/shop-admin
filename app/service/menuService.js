@@ -1,4 +1,4 @@
-const { Menu, Role, Role_menu }  = require('../model');
+const { Menu }  = require('../model');
 const sequelize = require('../../db');
 const { QueryTypes } = require('sequelize');
 

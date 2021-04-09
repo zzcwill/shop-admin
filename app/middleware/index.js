@@ -1,9 +1,9 @@
 const auth = require('./auth')
 const catchError = require('./catchError')
-const upload = require('./upload')
+const imgUpload = require('./imgUpload')
 
 module.exports ={
-	upload,
+	imgUpload,
 	auth,
 	catchError
 }

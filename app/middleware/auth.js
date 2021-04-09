@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const { Forbidden } = global.help.httpCode;
 const config = global.config;
 const cacheService = require('../service/cacheService');
