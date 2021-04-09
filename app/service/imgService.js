@@ -7,5 +7,5 @@ module.exports = {
     console.info(img)
     let newImg = await File.create(img)
     return newImg
-  },  
+  } 
 }

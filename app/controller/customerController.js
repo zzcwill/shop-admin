@@ -1,8 +1,7 @@
 const { resOk } = global.help.resData;
-const { orderService } = require('../service');
+const { customerService } = require('../service');
 const checkParam = global.help.checkParam;
 const lodash = global.help.lodash;
-const { getOrderCode } = global.help.order;
 const logger = global.help.logger;
 const { ParameterException } = global.help.httpCode;
 
@@ -46,13 +45,13 @@ module.exports = {
 		getData.page = lodash.toFinite(getData.page)
 		getData.pageSize = lodash.toFinite(getData.pageSize)
 
-		let listData = await orderService.list(getData);
+		let listData = await customerService.list(getData);
 
 		res.json(resOk(listData))		
 	},
 	add: async (req, res, next) => {
 		let ruleData = {
-			customer_name: [
+			name: [
 				{
 					ruleName: 'required',
 					rule: (val) => {
@@ -63,55 +62,7 @@ module.exports = {
 						return isOk
 					}
 				},
-			],	
-			sale_type: [
-				{
-					ruleName: 'required',
-					rule: (val) => {
-						var isOk = true
-						if (!val) {
-							isOk = false
-						}
-						return isOk
-					}
-				},
-			],
-			express_fee: [
-				{
-					ruleName: 'required',
-					rule: (val) => {
-						var isOk = true
-						if (!val) {
-							isOk = false
-						}
-						return isOk
-					}
-				},
-			],
-			pay_status: [
-				{
-					ruleName: 'required',
-					rule: (val) => {
-						var isOk = true
-						if (!val) {
-							isOk = false
-						}
-						return isOk
-					}
-				},
-			],
-			order_fee: [
-				{
-					ruleName: 'required',
-					rule: (val) => {
-						var isOk = true
-						if (!val) {
-							isOk = false
-						}
-						return isOk
-					}
-				},
-			],														
+			]
 		}
 		let msgParam = checkParam.check(req, ruleData)
 		if (msgParam) {
@@ -121,9 +72,8 @@ module.exports = {
 		}
 
 		let getData = req.body;
-		getData.order_code = getOrderCode()
 
-		let listData = await orderService.add(getData);
+		let listData = await customerService.add(getData);
 
 		res.json(resOk(listData))			
 	},
@@ -151,7 +101,7 @@ module.exports = {
 
 		let getData = req.body;
 
-		let isOK = await orderService.update(getData);
+		let isOK = await customerService.update(getData);
 
 		res.json(resOk({
 			isOK: isOK
@@ -181,7 +131,7 @@ module.exports = {
 
 		let getData = req.body;
 
-		let isOK = await orderService.delete(getData);
+		let isOK = await customerService.delete(getData);
 
 		res.json(resOk({
 			isOK: isOK

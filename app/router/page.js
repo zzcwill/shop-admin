@@ -22,6 +22,10 @@ router.get('/test4', function(req, res, next) {
   res.render('test4', { title: 'order' });
 });
 
+router.get('/test5', function(req, res, next) {
+  res.render('test5', { title: 'customer' });
+});
+
 router.get('/error', function(req, res, next) {
   next(new HttpException('test错误'))
 });

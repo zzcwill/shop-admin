@@ -5,6 +5,7 @@ const userService = require('./userService');
 const menuService = require('./menuService');
 const roleService = require('./roleService');
 const orderService = require('./orderService');
+const customerService = require('./customerService');
 
 module.exports = {
 	cacheService,
@@ -13,5 +14,6 @@ module.exports = {
 	userService,
 	menuService,
 	roleService,
-	orderService
+	orderService,
+	customerService
 }

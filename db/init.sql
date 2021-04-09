@@ -104,6 +104,8 @@ CREATE TABLE `goods` (
 	`goods_color` varchar(255) DEFAULT NULL COMMENT '商品颜色',
 	`goods_cost_price` decimal(10,2) NOT NULL COMMENT '进货价',
 	`goods_trade_price` decimal(10,2) DEFAULT NULL COMMENT '批发价',
+  `goods_stock` int(11) NOT NULL DEFAULT 0 COMMENT '库存',
+  `goods_sex` tinyint(1)  NOT NULL DEFAULT 1 COMMENT '男女鞋类型 1男鞋 0 女鞋',
 	`goods_note` varchar(255) DEFAULT NULL COMMENT '描述',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',

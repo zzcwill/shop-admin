@@ -12,7 +12,7 @@ const Goods = sequelize.define(
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
-    goods_code: {
+    goods_id: {
       type: Sequelize.STRING(255),
       allowNull: false,
 		},
@@ -40,6 +40,16 @@ const Goods = sequelize.define(
       type: Sequelize.DECIMAL(10, 2),
       allowNull: true,
 		},
+    goods_stock: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false,
+      defaultValue: 0
+    },
+    goods_sex: {
+      type: Sequelize.TINYINT(1),
+      allowNull: false,
+      defaultValue: 1
+    },
     create_time : {
       type: Sequelize. DATE,
       allowNull: false,

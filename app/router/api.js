@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controller');
-const { userController, imgController, excelController, emailController, menuController, roleController, orderController } = controller;
+const { userController, imgController, excelController, emailController, menuController, roleController, orderController, customerController } = controller;
 
 const { imgUpload, auth } = global.middleware;
 
@@ -38,6 +38,12 @@ router.post('/order/list', orderController.list);
 router.post('/order/add', orderController.add);
 router.post('/order/update', orderController.update);
 router.post('/order/delete', orderController.delete);
+
+//客户
+router.post('/customer/list', customerController.list);
+router.post('/customer/add', customerController.add);
+router.post('/customer/update', customerController.update);
+router.post('/customer/delete', customerController.delete);
 
 
 module.exports = router;

@@ -39,12 +39,13 @@
 		<%= title %>
 	</h1>
 
-	<h2 id="demo1">订单列表</h2>
+	<h2 id="demo1">客户列表</h2>
 	<br />
-	<h2 id="demo2">订单新增</h2>
+	<h2 id="demo2">客户新增</h2>
 	<br />
-	<h2 id="demo3">订单修改</h2>
-	<h2 id="demo4">订单删除</h2>
+	<h2 id="demo3">客户修改</h2>
+	<br />
+	<h2 id="demo4">客户删除</h2>
 	<br />
 
 
@@ -59,7 +60,7 @@
 
 			$.ajax({
 				type: "post",
-				url: baseUrl + "order/list",
+				url: baseUrl + "customer/list",
 				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {
@@ -70,30 +71,18 @@
 			});
 		})
 		$('#demo2').bind('click', function () {
+
 			var apiData = {
 				token: token,
-				customer_name: '订单客户' + random(),
-				sale_type: 1,
-				express_fee: 10,
-				pay_status: 1,
-				order_fee: 2000 + random(),
-				shoesArr: [
-					  {
-							goods_id : 1,
-							goods_num: 5,
-							goods_price: 80
-						},
-					  {
-							goods_id : 2,
-							goods_num: 5,
-							goods_price: 80
-						}						
-				]
+
+				name: 'test客户' + random(),
+				phone: '18042434280',
+				address: '金海社区'		
 			}
 
 			$.ajax({
 				type: "post",
-				url: baseUrl + "order/add",
+				url: baseUrl + "customer/add",
 				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {
@@ -108,11 +97,15 @@
 
 			var apiData = {
 				token: token,
+				id: 2,
+				name: 'test客户' + random(),
+				phone: '18042434280',				
+				address: 'test修改' + random()
 			}
 
 			$.ajax({
 				type: "post",
-				url: baseUrl + "order/update",
+				url: baseUrl + "customer/update",
 				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {
@@ -127,11 +120,12 @@
 
 			var apiData = {
 				token: token,
+				id: 2
 			}
 
 			$.ajax({
 				type: "post",
-				url: baseUrl + "order/delete",
+				url: baseUrl + "customer/delete",
 				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {

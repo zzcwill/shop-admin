@@ -31,7 +31,7 @@ const Order_goods = sequelize.define(
     goods_fee: {
       type: Sequelize.DECIMAL(10,2),
       allowNull: false,
-		}    
+		}
   },
   {
     tableName: 'order_goods', // 手动设置表的实际名称

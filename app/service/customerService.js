@@ -1,4 +1,4 @@
-const { Order }  = require('../model');
+const { Customer }  = require('../model');
 const sequelize = require('../../db');
 const { QueryTypes } = require('sequelize');
 
@@ -6,7 +6,7 @@ module.exports = {
   list: async (search) => {
     const { page, pageSize } = search
     let offset = (page - 1) * pageSize;
-		const { count, rows } = await Order.findAndCountAll({
+		const { count, rows } = await Customer.findAndCountAll({
 			where: {},
 			offset: offset,
 			limit: pageSize,
@@ -18,19 +18,18 @@ module.exports = {
       count: count
     }
   },
-  add: async (order) => {
-    let newOrder = await Order.create(order)
-
-    //生成订单
-
-    return newOrder
+  add: async (customer) => {
+    let newCustomer = await Customer.create(customer)
+    return newCustomer
   },
   update: async (search) => {
-		let { id, customer_name } = search;
+		let { id, name, phone, address } = search;
 
-    let isOk = await Order.update(
+    let isOk = await Customer.update(
       {
-				customer_name: customer_name,
+				name: name,
+				phone: phone,
+				address: address
 			},
       {
         //条件
@@ -43,7 +42,7 @@ module.exports = {
   },
 	delete: async (search) => {
 		let { id } = search;
-		let isOk = await Order.destroy({
+		let isOk = await Customer.destroy({
 			where: {
 				id: id
 			}
