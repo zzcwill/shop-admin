@@ -1,5 +1,5 @@
 const { resOk } = global.help.resData;
-const { orderService } = require('../service');
+const { orderService, goodsService } = require('../service');
 const checkParam = global.help.checkParam;
 const lodash = global.help.lodash;
 const { getOrderCode } = global.help.order;
@@ -111,7 +111,19 @@ module.exports = {
 						return isOk
 					}
 				},
-			],														
+			],
+			shoesArr: [
+				{
+					ruleName: 'required',
+					rule: (val) => {
+						var isOk = true
+						if (!val) {
+							isOk = false
+						}
+						return isOk
+					}
+				},
+			]														
 		}
 		let msgParam = checkParam.check(req, ruleData)
 		if (msgParam) {
@@ -122,10 +134,31 @@ module.exports = {
 
 		let getData = req.body;
 		getData.order_code = getOrderCode()
+		getData.shoesArr = JSON.parse(getData.shoesArr)
 
-		let listData = await orderService.add(getData);
 
-		res.json(resOk(listData))			
+		let { shoesArr } = getData;
+		let goodsStockList = await Promise.all(
+			shoesArr.map(
+				async (item) =>{
+					let itemGoods = await goodsService.getGoodsById(item.goods_id)
+					let isCanBuy = item.goods_num <= itemGoods.goods_stock ? 1 : 0
+					return isCanBuy
+				}
+			)
+		)
+
+		if(goodsStockList.indexOf(0) !== -1) {
+			let error = new ParameterException('商品库存不足')
+			next(error)			
+			return
+		}
+
+		let isOK = await orderService.add(getData);
+
+		res.json(resOk({
+			isOK: isOK
+		}));		
 	},
 	update: async (req, res, next) => {
 		let ruleData = {

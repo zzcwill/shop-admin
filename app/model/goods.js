@@ -12,7 +12,7 @@ const Goods = sequelize.define(
       primaryKey: true, // 字段是主键
       autoIncrement: true, // 是否自增
     },
-    goods_id: {
+    goods_code: {
       type: Sequelize.STRING(255),
       allowNull: false,
 		},
@@ -51,11 +51,13 @@ const Goods = sequelize.define(
       defaultValue: 1
     },
     create_time : {
-      type: Sequelize. DATE,
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
       allowNull: false,
 		},
     modify_time : {
-      type: Sequelize. DATE,
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
       allowNull: false,
 		}								
   },

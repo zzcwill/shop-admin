@@ -55,11 +55,13 @@ const Order = sequelize.define(
       allowNull: false,
 		},
     create_time : {
-      type: Sequelize. DATE,
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
       allowNull: false,
 		},
     modify_time : {
-      type: Sequelize. DATE,
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
       allowNull: false,
 		}    
   },
