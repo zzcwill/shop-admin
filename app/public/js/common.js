@@ -1,0 +1,2 @@
+var baseUrl = '/api/';
+var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoienpjIiwibGV2ZWwiOm51bGwsInJlZ2lzdGVyVGltZSI6IjIwMjEtMDQtMDgiLCJpYXQiOjE2MTc5MzM0NjEsImV4cCI6MTYxNzk0NDI2MX0.NRRf5h5YrDuWguyOls6bpZSrddnu1R7wZaC10Ipw3Hw';

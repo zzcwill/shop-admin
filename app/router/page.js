@@ -3,7 +3,7 @@ var router = express.Router();
 var { HttpException } = global.help.httpCode;
 
 router.get('/', function(req, res, next) {
-  res.redirect('/test')
+  res.redirect('/test3')
 });
 
 router.get('/test', function(req, res, next) {
@@ -12,6 +12,10 @@ router.get('/test', function(req, res, next) {
 
 router.get('/test2', function(req, res, next) {
   res.render('test2', { title: 'test2' });
+});
+
+router.get('/test3', function(req, res, next) {
+  res.render('test3', { title: 'menu' });
 });
 
 router.get('/error', function(req, res, next) {

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controller');
-const { userController, imgController, excelController, emailController } = controller;
+const { userController, imgController, excelController, emailController, menuController, roleController } = controller;
 
 const { upload } = global.middleware;
 
@@ -25,7 +25,13 @@ router.get('/excel2', excelController.get2);
 //发送邮件
 router.post('/email', emailController.send);
 
+//菜单列表
+router.post('/menu', menuController.menu);
+router.post('/userMenu', menuController.userMenu);
 
+//角色列表
+router.post('/role', roleController.role);
+router.post('/userRole', roleController.userRole);
 
 
 module.exports = router;
