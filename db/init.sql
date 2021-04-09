@@ -139,7 +139,7 @@ CREATE TABLE `customer` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品Id',
-	`order_code` varchar(255) NOT NULL COMMENT '订单编号-uuid',
+	`order_code` varchar(255) NOT NULL COMMENT '订单编号',
   `customer_name` varchar(255) NOT NULL COMMENT '客户姓名',
   `phone` varchar(11) DEFAULT NULL COMMENT '发货手机号',
 	`address` varchar(255) DEFAULT NULL COMMENT '详细地址',

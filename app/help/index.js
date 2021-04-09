@@ -4,7 +4,7 @@ const token = require('./token')
 const password = require('./password')
 const checkParam = require('./checkParam')
 const camelCase = require('./camelCase')
-const code = require('./code')
+const order = require('./order')
 
 // 第三方插件
 const logger = require('./logger')
@@ -18,7 +18,7 @@ module.exports = {
 	password,
 	checkParam,
 	camelCase,
-	code,
+	order,
 
 	logger,
 	dayjs,
