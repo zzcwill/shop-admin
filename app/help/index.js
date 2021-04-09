@@ -3,6 +3,7 @@ const resData = require('./resData')
 const token = require('./token')
 const password = require('./password')
 const checkParam = require('./checkParam')
+const camelCase = require('./camelCase')
 const code = require('./code')
 
 // 第三方插件
@@ -16,6 +17,7 @@ module.exports = {
 	token,
 	password,
 	checkParam,
+	camelCase,
 	code,
 
 	logger,

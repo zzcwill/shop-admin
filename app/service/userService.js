@@ -5,7 +5,8 @@ module.exports = {
     let user = await User.findOne({
       where: {
         username
-      }
+      },
+      raw:true
     })
     return user
   },

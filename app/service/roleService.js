@@ -9,7 +9,8 @@ module.exports = {
 		const { count, rows } = await Role.findAndCountAll({
 			where: {},
 			offset: offset,
-			limit: pageSize
+			limit: pageSize,
+      raw:true
 		});
 
     return {
@@ -23,7 +24,8 @@ module.exports = {
         id: id
       },
 			offset: offset,
-			limit: pageSize
+			limit: pageSize,
+      raw:true
 		});
 
     return {
@@ -47,7 +49,8 @@ module.exports = {
         OFFSET ?;`,
       {
         replacements: [uid, pageSize, offset],
-        type: QueryTypes.SELECT
+        type: QueryTypes.SELECT,
+        raw: true
       }
     );
 

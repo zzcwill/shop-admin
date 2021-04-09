@@ -2,6 +2,38 @@ const { Menu, Role, Role_menu }  = require('../model');
 const sequelize = require('../../db');
 const { QueryTypes } = require('sequelize');
 
+let getTreeMenu = (dataList) => {
+  let dataArr = [];
+  let childrenArr = [];
+
+  for(let key = 0 ; key < dataList.length ; key++) {
+    if(dataList[key].parent_id === 0) {
+      let itemData = dataList[key]
+      itemData.children = []
+      dataArr.push(itemData)
+    }
+  }
+
+  for(let key = 0 ; key < dataList.length ; key++) {
+    if(dataList[key].parent_id !== 0) {
+      let itemData = dataList[key]
+      if(!childrenArr[itemData.parent_id]) {
+        childrenArr[itemData.parent_id] = []
+      }
+      childrenArr[itemData.parent_id].push(itemData)
+    }
+  }  
+
+  for(let key = 0 ; key < dataArr.length ; key++) {
+    let itemData = dataArr[key]
+    let childrenData = childrenArr[itemData.id]
+    itemData.children = childrenData
+
+    dataArr[key] = itemData
+  } 
+  return dataArr;
+}
+
 module.exports = {
   menu: async (search) => {
     let { page, pageSize } = search;
@@ -9,13 +41,16 @@ module.exports = {
 		const { count, rows } = await Menu.findAndCountAll({
 			where: {},
 			offset: offset,
-			limit: pageSize
+			limit: pageSize,
+      raw:true
 		});
 
+    let treeMenu = getTreeMenu(rows)
+
     return {
-      list: rows,
-      count: count
-    }
+      list: treeMenu,
+      count: treeMenu.length
+    }    
   },
   userMenu: async (search) => {
     const { uid, page, pageSize } = search;
@@ -35,13 +70,16 @@ module.exports = {
         OFFSET ?;`,
       {
         replacements: [uid, pageSize, offset],
-        type: QueryTypes.SELECT
+        type: QueryTypes.SELECT,
+        raw: true
       }
     );
 
+    let treeMenu = getTreeMenu(userRoleList)
+
     return {
-      list: userRoleList,
-      count: userRoleList.length
+      list: treeMenu,
+      count: treeMenu.length
     }
   },
 }
