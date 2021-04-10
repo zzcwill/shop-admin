@@ -4,6 +4,9 @@
 # mysql
 init.sql
 
+# 消息推送
+/socket
+
 ### 项目运行
 - 全局包安装
 - npm install nodemon -g

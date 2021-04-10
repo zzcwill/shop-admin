@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<!-- <link rel="shortcut icon" href="/images/favicon.ico"/> -->
+	<meta name="viewport" content="width=1240,user-scalable=yes">
+	<meta name="keywords" content="zzc" />
+	<meta name="description" content="zzc" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/css/reset.css' />
+	<link rel='stylesheet' href='/css/common.css' />
+	<script src="/js/jquery-1.11.1.min.js"></script>
+	<script src="/js/socket.io.js"></script>
+	<script src="/js/common.js"></script>
+</head>
+<style>
+	h1 {
+		margin: 20px auto;
+		text-align: center;
+	}
+
+	h2{
+		margin: 10px auto;
+		text-align: center;
+	}
+	h3{
+		margin: 10px auto;
+		width: 302px;
+		height: 34px;
+		background-color: #000;
+	}
+</style>
+<body>
+	<h1><%= title %></h1>
+	<h1 id="uid"><%= uid %></h1>
+	<h1 id="username"><%= username %></h1>
+	<br />
+	<h2 id="send">发送的消息</h2>
+	<input placeholder="输入发送消息" id="msg">
+	<h2>接收的消息</h2>
+	<ul id="receive">
+	</ul>
+
+	<h2 id="toServeSend">socket服务端信息</h2>
+
+
+	<script>
+		var httplinkUrl = 'http://127.0.0.1:9999';
+    var socket = io.connect(httplinkUrl);
+ 
+    //连接成功时触发
+    socket.on('connect', function () {
+        console.log('socket-连接');
+    });
+ 
+    //连接断开时触发
+    socket.on('disconnect', function () {
+        console.log('socket-断开');
+    });
+
+		var userInfo = {
+			uid: $('#uid').text(),
+			username: $('#username').text(),
+		}
+		socket.emit('login',userInfo);
+ 
+    //收到消息时触发
+    socket.on('message', function (data) {
+				var node = '<li>' + data + '</li>';
+        $("#receive").append(node);
+    });
+
+		// 监听用户登录
+		socket.on('login',function (data) {
+			var node = '<li>' + data.uid + '-' + 'data.username' + '登录</li>';
+			$("#receive").append(node)
+			console.info(data)
+		});
+  	// 监听用户退出
+		socket.on('logout',function (data) {
+			var node = '<li>' + data.uid + '-' + 'data.username' + '退出</li>';
+			$("#receive").append(node)
+			console.info(data)
+		});
+ 
+		$('#send').bind('click',function(){
+			var userInfo = {
+				uid: $('#uid').text(),
+				username: $('#username').text(),
+				msg: '客户端信息'
+			}
+			// userInfo = JSON.stringify(userInfo)
+			// message
+			socket.send(userInfo);
+		})
+
+		$('#toServeSend').bind('click',function(){
+			$.ajax({
+				type: "get",
+				url:  httplinkUrl + '/api/' + 'socket',
+				data: {},
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});			
+		})
+</script>
+</body>
+
+</html>

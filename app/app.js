@@ -36,6 +36,7 @@ app.use(cookieParser());
 app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(serveStatic(path.join(__dirname, '../imgData')));
 app.use(helmet());
+// app.use(cors());
 
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -54,7 +55,7 @@ var accessLogStream = rfs.createStream(generator, {
 app.use(logger('combined',{stream:accessLogStream}));
 
 app.use('/', pageRouter);
-app.use('/api', cors(), global.middleware.auth, apiRouter);
+app.use('/api', global.middleware.auth, apiRouter);
 
 app.use((req, res, next) => {
   var err = new global.help.httpCode.NotFound();
