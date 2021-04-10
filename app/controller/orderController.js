@@ -4,7 +4,7 @@ const checkParam = global.help.checkParam;
 const lodash = global.help.lodash;
 const { getOrderCode } = global.help.order;
 const logger = global.help.logger;
-const { ParameterException } = global.help.httpCode;
+const { HttpException, ParameterException } = global.help.httpCode;
 
 
 module.exports = {
@@ -154,10 +154,17 @@ module.exports = {
 			return
 		}
 
-		let isOK = await orderService.add(getData);
+		
+		let result = await orderService.add(getData);
+
+		if(result.isOK === 0) {
+			let error = new ParameterException('数据库操作失败')
+			next(error)
+			return			
+		}
 
 		res.json(resOk({
-			isOK: isOK
+			isOK: result.isOK
 		}));		
 	},
 	update: async (req, res, next) => {

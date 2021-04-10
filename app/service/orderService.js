@@ -1,7 +1,6 @@
-const { Order, Order_goods }  = require('../model');
+const { Order, Order_goods, Goods }  = require('../model');
 const sequelize = require('../../db');
-const { QueryTypes } = require('sequelize');
-const { Promise } = require('../../redis');
+const { QueryTypes, where } = require('sequelize');
 const lodash = global.help.lodash;
 
 module.exports = {
@@ -21,52 +20,78 @@ module.exports = {
     }
   },
   add: async (orderInfo) => {
-    let { order_code, customer_name, sale_type, express_fee, pay_status, order_fee, shoesArr } = orderInfo
+    let { order_code, customer_name, sale_type, express_fee, pay_status, order_fee, shoesArr } = orderInfo;
+    const t = await sequelize.transaction();
+    //事务
+    let result = {
+      error: {},
+      isOK: 0
+    }
+    try {
 
-    // var apiData = {
-    //   customer_name: '订单客户' + random(),
-    //   sale_type: 1,
-    //   express_fee: 10,
-    //   pay_status: 1,
-    //   order_fee: 2000 + random(),
-    //   shoesArr: [
-    //     {        
-    //       goods_id : 1,
-    //       goods_num: 5,
-    //       goods_price: 80}
-    //   ]
-    // }
-
-    //这里要加事务，明天做
-
-    let newOrder = lodash.pick(orderInfo, ['order_code', 'customer_name', 'sale_type', 'express_fee', 'pay_status', 'order_fee']);
-    await Order.create(newOrder)
-
-    let order = await Order.findOne({
-      where: {
-        order_code: order_code
-      },
-      raw:true
-    })
+        let newOrder = lodash.pick(orderInfo, ['order_code', 'customer_name', 'sale_type', 'express_fee', 'pay_status', 'order_fee']);
+        await Order.create(newOrder, { transaction: t })
     
+        let order = await Order.findOne({
+          where: {
+            order_code: order_code
+          },
+          raw:true,
+          transaction: t
+        })
 
-    shoesArr.map(
-      async (item) => {
-        await Order_goods.create(
-          {
-            order_id: order.id,
-            goods_id: item.goods_id,
-            goods_num: item.goods_num,
-            goods_price: item.goods_price,
-            goods_fee: item.goods_num * item.goods_price
-          }
-        )
+        for( key = 0 ; key < shoesArr.length ; key++ ) {
+          let item = shoesArr[key]
+
+          let sunMoney = item.goods_num * item.goods_price;
+          await Order_goods.create(
+            {
+              order_id: order.id,
+              goods_id: item.goods_id,
+              goods_num: item.goods_num,
+              goods_price: item.goods_price,
+              goods_fee: sunMoney
+            },
+            { transaction: t }
+          );
+
+          let itemGoods = await Goods.findOne({
+            where: {
+              id: item.goods_id
+            },
+            raw:true,
+            transaction: t
+          })
+
+          let stock = itemGoods.goods_stock - item.goods_num;
+          await Goods.update(
+            {
+              goods_stock: stock,
+            },
+            {
+              //条件
+              where: {
+                id: item.goods_id
+              },
+              transaction: t
+            }
+          )          
+        }
+        
+        await t.commit();
+
+        result.isOK = 1;
+
+      
+    } catch (error) {
+      console.info(error)
+      result = {
+        error: error,
+        isOK: 0       
       }
-    )
-
-    //生成订单
-
-    return [1]
+      await t.rollback();
+    }
+    return result
   },
   update: async (search) => {
 		let { id, customer_name } = search;
