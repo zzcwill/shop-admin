@@ -104,7 +104,8 @@ module.exports = {
         //条件
         where: {
 					id: id
-				}
+				},
+        raw:true
       }
     )
     return isOk[0]
@@ -114,8 +115,9 @@ module.exports = {
 		let isOk = await Order.destroy({
 			where: {
 				id: id
-			}
+			},
+      raw:true
 		})
-    return isOk[0]		
+    return isOk	
 	},  
 }

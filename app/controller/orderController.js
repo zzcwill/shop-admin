@@ -158,7 +158,7 @@ module.exports = {
 		let result = await orderService.add(getData);
 
 		if(result.isOK === 0) {
-			let error = new ParameterException('数据库操作失败')
+			let error = result.error
 			next(error)
 			return			
 		}

@@ -11,7 +11,13 @@ var catchError = async (err, req, res, next) => {
 
     if (isDev) {
       if(!isHttpException) {
-        throw err;
+        if(err.name === 'SequelizeDatabaseError') {
+          res.status(500)
+          res.json(resFail(err.parent.sqlMessage, resCodeArr[1][0]))            
+        }
+        if(err.name !== 'SequelizeDatabaseError') {
+          throw err;          
+        }     
       } 
       if (isHttpException) {
         res.status(err.status)

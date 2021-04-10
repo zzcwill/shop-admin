@@ -5,7 +5,7 @@ const uuid = require('uuid');
 //设置保存规则
 let storage = multer.diskStorage({
   //destination：字段设置上传路径，可以为函数
-  destination: path.resolve(__dirname, '../public/uploads'),
+  destination: path.resolve(__dirname, '../../imgData/uploads'),
   //filename：设置文件保存的文件名
   filename: function(req, file, cb) {
       let extName = file.originalname.slice(file.originalname.lastIndexOf('.'));
