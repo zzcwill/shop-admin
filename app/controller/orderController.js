@@ -221,10 +221,24 @@ module.exports = {
 
 		let getData = req.body;
 
-		let isOK = await orderService.delete(getData);
+		let order = await orderService.getOrderById(getData.id);
+
+		if (!order) {
+			let error = new ParameterException('该订单不存在')
+			next(error)
+			return
+		}
+		
+		let result = await orderService.delete(getData);
+
+		if(result.isOK === 0) {
+			let error = result.error
+			next(error)
+			return			
+		}
 
 		res.json(resOk({
-			isOK: isOK
-		}))		
+			isOK: result.isOK
+		}));
 	},	
 }

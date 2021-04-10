@@ -4,6 +4,15 @@ const { QueryTypes, where } = require('sequelize');
 const lodash = global.help.lodash;
 
 module.exports = {
+  getOrderById: async (id) => {
+    let user = await Order.findOne({
+      where: {
+        id
+      },
+      raw:true
+    })
+    return user
+  },  
   list: async (search) => {
     const { page, pageSize } = search
     let offset = (page - 1) * pageSize;
@@ -112,12 +121,77 @@ module.exports = {
   },
 	delete: async (search) => {
 		let { id } = search;
-		let isOk = await Order.destroy({
-			where: {
-				id: id
-			},
-      raw:true
-		})
-    return isOk	
+    const t = await sequelize.transaction();
+    //事务
+    let result = {
+      error: {},
+      isOK: 0
+    }    
+
+    try {
+
+      await sequelize.transaction(async (t) => {   
+        await Order.destroy({
+          where: {
+            id: id
+          },
+          raw:true,
+          transaction: t
+        });
+        let goodsList = await Order_goods.findAll({
+          where: {
+            order_id: id
+          },
+          raw:true,
+          transaction: t
+        }); 
+        
+        for( key = 0 ; key < goodsList.length ; key++ ) {
+          let item = goodsList[key]
+
+          let itemGoods = await Goods.findOne({
+            where: {
+              id: item.goods_id
+            },
+            raw:true,
+            transaction: t
+          })
+
+          let stock = itemGoods.goods_stock + item.goods_num;
+          await Goods.update(
+            {
+              goods_stock: stock,
+            },
+            {
+              //条件
+              where: {
+                id: item.goods_id
+              },
+              transaction: t
+            }
+          )         
+        }        
+   
+        await Order_goods.destroy({
+          where: {
+            order_id: id
+          },
+          raw:true,
+          transaction: t
+        });
+        
+        result.isOK = 1
+      });
+    
+    } catch (error) {
+      console.info(error)
+      result = {
+        error: error,
+        isOK: 0       
+      }    
+    }
+
+
+    return result	
 	},  
 }
