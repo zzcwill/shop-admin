@@ -61,7 +61,7 @@ module.exports = {
 		let apidata = {}
 		if(!user) {
 			apidata.isOk = 0;
-
+			apidata.openid = openid;
 			res.json(resOk(apidata));
 			return
 		}
@@ -72,8 +72,8 @@ module.exports = {
 			await cacheService.set(token, user, config.security.expiresIn);
 
 			apidata.token = token;
-			apidata.openid = openid;
-			apidata.session_key = session_key;
+			// apidata.openid = openid;
+			// apidata.session_key = session_key;
 			apidata.isOk = 1;
 			apidata.user = tokenCahe;
 

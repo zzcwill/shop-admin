@@ -21,11 +21,6 @@ App({
           },
           (res2) => {
             console.info(res2.data)
-            wx.getUserInfo({
-              success: function(res3) {
-                console.info(res3)
-              }              
-            })    
           }
         )
       }
