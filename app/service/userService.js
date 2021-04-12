@@ -25,5 +25,14 @@ module.exports = {
       }
     )
     return isOk[0]
-  }
+  },
+  getUserByOpenid: async (openid) => {
+    let user = await User.findOne({
+      where: {
+        openid
+      },
+      raw:true
+    })
+    return user
+  },
 }

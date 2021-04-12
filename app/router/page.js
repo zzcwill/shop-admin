@@ -3,7 +3,7 @@ const router = express.Router();
 const { HttpException } = global.help.httpCode;
 
 router.get('/', function(req, res, next) {
-  res.redirect('/socket')
+  res.redirect('/test4')
 });
 
 router.get('/test', function(req, res, next) {

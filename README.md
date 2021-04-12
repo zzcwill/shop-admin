@@ -7,6 +7,9 @@ init.sql
 # 消息推送
 /socket
 
+# 小程序
+shop-xcx
+
 ### 项目运行
 - 全局包安装
 - npm install nodemon -g

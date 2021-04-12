@@ -47,7 +47,11 @@ const User = sequelize.define(
         return dayjs( this.getDataValue('registerTime') ).format('YYYY-MM-DD');
       },
       // field: 'register_time' // 数据库中字段的实际名称
-    }
+    },
+    openid: {
+      type: Sequelize.STRING(255),
+      allowNull: true,
+		}
   },
   {
     tableName: 'user', // 手动设置表的实际名称

@@ -30,6 +30,7 @@ CREATE TABLE `user` (
   `register_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
 	`modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `last_login_time` datetime DEFAULT NULL COMMENT '上次登录时间',
+  `openid` varchar(255) DEFAULT NULL COMMENT '微信用户openid',
   PRIMARY KEY (`uid`) USING BTREE,
   UNIQUE KEY `uid_username` (`username`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='用户表';

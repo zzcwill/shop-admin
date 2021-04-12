@@ -6,6 +6,7 @@ const menuController = require('./menuController');
 const roleController = require('./roleController');
 const orderController = require('./orderController');
 const customerController = require('./customerController');
+const wechatController = require('./wechatController');
 
 module.exports = {
 	userController,
@@ -15,5 +16,6 @@ module.exports = {
 	menuController,
 	roleController,
 	orderController,
-	customerController
+	customerController,
+	wechatController
 }
