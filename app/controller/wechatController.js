@@ -15,6 +15,7 @@ const appid = 'wxe9bd6704da7435ff';
 const appSecret = 'b21f5a2b7497bacd729537fbc135ab84';
 
 module.exports = {
+	// 获取微信小程序-session_key和openid, 和shop-admin授权登录
 	jscode2session: async (req, res, next) => {
 		let ruleData = {
 			code: [
@@ -52,6 +53,7 @@ module.exports = {
 		let openid = wechatdata.data.openid;
 		// 这个去获取用户信息
 		let session_key = wechatdata.data.session_key;
+
 		let user = await userService.getUserByOpenid(openid) 
 
 		// 用session_key-去获取微信用户信息
@@ -71,7 +73,7 @@ module.exports = {
 
 			apidata.token = token;
 			apidata.openid = openid;
-			// apidata.session_key = session_key;
+			apidata.session_key = session_key;
 			apidata.isOk = 1;
 			apidata.user = tokenCahe;
 

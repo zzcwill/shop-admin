@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controller');
-const { userController, imgController, excelController, emailController, menuController, roleController, orderController, customerController, wechatController } = controller;
+const { userController, imgController, excelController, emailController, menuController, roleController, orderController, customerController, wechatController, wechatController2 } = controller;
 
 const { imgUpload, auth } = global.middleware;
 
@@ -45,7 +45,7 @@ router.post('/customer/add', customerController.add);
 router.post('/customer/update', customerController.update);
 router.post('/customer/delete', customerController.delete);
 
-//微信小程序相关
+// 微信小程序相关
 router.post('/wechat/jscode2session', wechatController.jscode2session);
 
 module.exports = router;

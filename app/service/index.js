@@ -8,8 +8,6 @@ const orderService = require('./orderService');
 const goodsService = require('./goodsService');
 const customerService = require('./customerService');
 
-const wechatService = require('./wechatService');
-
 module.exports = {
 	cacheService,
 	imgService,
@@ -19,6 +17,5 @@ module.exports = {
 	roleService,
 	orderService,
 	goodsService,
-	customerService,
-	wechatService
+	customerService
 }
