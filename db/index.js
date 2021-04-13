@@ -14,7 +14,7 @@ var sequelize = new Sequelize(
 			'underscored': true
 		},
     'pool': {
-			max: 5,
+			max: 10,
 			min: 0,
 			idle: 10000
 		}

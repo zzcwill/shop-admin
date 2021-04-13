@@ -10,6 +10,10 @@ init.sql
 # 小程序
 shop-xcx
 
+# ab-登录接口demo
+ab -n 10 -c 2 -t 5 -T 'application/json' -p ab.txt http://127.0.0.1:3000/api/login
+ab.txt放post请求参数
+
 ### 项目运行
 - 全局包安装
 - npm install nodemon -g
