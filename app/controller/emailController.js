@@ -5,6 +5,7 @@ const checkParam = global.help.checkParam;
 const lodash = global.help.lodash;
 const logger = global.help.logger;
 const { ParameterException } = global.help.httpCode;
+const mq = require('../producer');
 
 const { resOk } = global.help.resData;
 
@@ -61,5 +62,36 @@ module.exports = {
 				isOK: 1
 			},'邮件发送成功'))			
 		}
-	}
+	},
+	sendMq: async (req, res, next) => {
+		let ruleData = {
+			title: [
+				{
+					ruleName: 'required',
+					rule: (val) => {
+						var isOk = true
+						if (!val) {
+							isOk = false
+						}
+						return isOk
+					}
+				}
+			]
+		}
+		let msgParam = checkParam.check(req, ruleData)
+		if (msgParam) {
+			let error = new ParameterException(msgParam)
+			next(error)
+			return
+		}
+
+		let getData = req.body;
+		let username = res.user.username;
+
+		await mq.eamilDLX(username)
+
+		res.json(resOk({
+			isOK: 1
+		},'邮件发送成功'))
+	}	
 }

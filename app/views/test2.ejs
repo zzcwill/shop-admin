@@ -46,6 +46,7 @@
 	</h2>
 	<br />
 	<h2 id="email">发送邮件</h2>
+	<h2 id="emailMq">发送邮件mq</h2>
 	<br />
 	<h2 id="excel">导出excel</h2>
 	<h2 id="excel2">导出excel2</h2>
@@ -91,6 +92,26 @@
 			$.ajax({
 				type: "post",
 				url: baseUrl + "email",
+				contentType: 'application/x-www-form-urlencoded',
+				data: apiData,
+				success: function (res) {
+					console.log(res);
+				},
+				error: function () {
+				}
+			});
+		})
+
+		$('#emailMq').bind('click', function () {
+
+			var apiData = {
+				token: token,
+				title: '邮件mq'
+			}
+
+			$.ajax({
+				type: "post",
+				url: baseUrl + "emailMq",
 				contentType: 'application/x-www-form-urlencoded',
 				data: apiData,
 				success: function (res) {

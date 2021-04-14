@@ -24,6 +24,7 @@ router.get('/excel2', excelController.get2);
 
 //发送邮件
 router.post('/email', emailController.send);
+router.post('/emailMq', emailController.sendMq);
 
 //菜单
 router.post('/menu', menuController.menu);
