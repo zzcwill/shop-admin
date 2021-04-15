@@ -1,0 +1,9 @@
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoienpjIiwibGV2ZWwiOm51bGwsImlhdCI6MTYxODM5MDI3NCwiZXhwIjoxNjE4NDc2Njc0fQ.hbLEu9kUKowkMmSPk0k7qlfehlS12JEtjhJeT_s3MJs",
+	"customer_name": "订单客户8",
+	"sale_type": 1,
+	"express_fee": 10,
+	"pay_status": 1,
+	"order_fee": 2009,
+	"shoesArr": ""
+}

@@ -6,7 +6,6 @@ const { getOrderCode } = global.help.order;
 const logger = global.help.logger;
 const { HttpException, ParameterException } = global.help.httpCode;
 
-
 module.exports = {
 	list: async (req, res, next) => {
 		let ruleData = {
@@ -112,6 +111,7 @@ module.exports = {
 					}
 				},
 			],
+			// ab-test-要注释掉
 			shoesArr: [
 				{
 					ruleName: 'required',
@@ -134,6 +134,12 @@ module.exports = {
 
 		let getData = req.body;
 		getData.order_code = getOrderCode()
+
+		console.info(getData)
+
+		// ab test
+		// getData.shoesArr = '[{"goods_id":1,"goods_num":5,"goods_price":80},{"goods_id":2,"goods_num":5,"goods_price":80}]';
+
 		getData.shoesArr = JSON.parse(getData.shoesArr)
 
 
