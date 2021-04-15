@@ -34,5 +34,14 @@ module.exports = {
     var duration = (Date.now() - t);
     logger.debug('Cache', 'set', key, (duration + 'ms').green);
     return result[0][1];
-  }
+  },
+
+  decr :async (key, seconds) => {
+    var t = Date.now();
+    var result = await redis.multi().decr(key).expire(key, seconds)
+      .exec();
+    var duration = (Date.now() - t);
+    logger.debug('Cache', 'set', key, (duration + 'ms').green);
+    return result[0][1];
+  }  
 }
