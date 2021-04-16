@@ -17,6 +17,10 @@ const auth = async (req, res, next) => {
     token = req.query.token;
   }
 
+  if(req.headers.token) {
+    token = req.headers.token;
+  }
+
   // 无带token
   if (!token) {
     next( new Forbidden('需要传token') );
