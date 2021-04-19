@@ -22,7 +22,6 @@ const http = Axios.create({
 
 // 设置请求头
 http.interceptors.request.use(config => {
-  console.info(config)
   if (getToken()) {
     config.headers['token'] = getToken()
   }

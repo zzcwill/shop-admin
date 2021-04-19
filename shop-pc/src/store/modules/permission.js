@@ -105,6 +105,8 @@ const actions = {
         // console.info(data2)
         let dataApi = formatRoutes(data2)
 
+        console.info(dataApi)
+
         commit('SET_ROUTES', dataApi)
         resolve(dataApi)
       }).catch(error => {

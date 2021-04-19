@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controller');
-const { userController, imgController, excelController, emailController, menuController, roleController, orderController, customerController, wechatController, wechatController2 } = controller;
+const { userController, imgController, excelController, emailController, menuController, roleController, orderController, customerController, wechatController } = controller;
 
-const { imgUpload, auth } = global.middleware;
+const { imgUpload, auth, page } = global.middleware;
 
 // user-about
 router.post('/login', userController.login);
@@ -27,8 +27,8 @@ router.post('/email', emailController.send);
 router.post('/emailMq', emailController.sendMq);
 
 //菜单
-router.post('/menu', menuController.menu);
-router.post('/userMenu', menuController.userMenu);
+router.post('/menu', page, menuController.menu);
+router.post('/userMenu', page, menuController.userMenu);
 
 //角色
 router.post('/role', roleController.role);

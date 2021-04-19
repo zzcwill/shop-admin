@@ -61,10 +61,7 @@ export function logout() {
 export function getInfo() {
   return request({
     url: 'userInfo',
-    method: 'post',
-    data: {
-      name: 'zzc'
-    }
+    method: 'post'
   })
 }
 //获取路由
