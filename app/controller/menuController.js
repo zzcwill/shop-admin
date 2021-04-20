@@ -7,7 +7,7 @@ const logger = global.help.logger;
 const { ParameterException } = global.help.httpCode;
 
 module.exports = {
-	menu: async (req, res, next) => {
+	menu: async (ctx, next) => {
 		let ruleData = {
 			page: [
 				{
@@ -49,7 +49,7 @@ module.exports = {
 
 		res.json(resOk(listData))			
 	},
-	userMenu: async (req, res, next) => {
+	userMenu: async (ctx, next) => {
 		let ruleData = {
 			page: [
 				{

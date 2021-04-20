@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+const router = require('koa-router')();
+
+router.prefix('/api');
 
 const controller = require('../controller');
 const { userController, imgController, excelController, emailController, menuController, roleController, orderController, customerController, wechatController } = controller;

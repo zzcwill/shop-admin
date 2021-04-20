@@ -1,37 +1,39 @@
-var config = require('config-lite')(__dirname);
+const config = require('config-lite')(__dirname);
 global.config = config;
-var help = require('./help');
+const help = require('./help');
 global.help = help;
-var middleware = require('./middleware');
+const middleware = require('./middleware');
 global.middleware = middleware;
 
-var path = require('path');
-var express = require('express');
-var serveFavicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
-var cookieSession = require('cookie-session');
-var bodyParser = require('body-parser');
-var serveStatic = require('serve-static');
-var cors = require('cors');
+const path = require('path');
+const Koa = require('koa')
+const views = require('koa-views');
+const serveFavicon = require('koa-favicon');
+const cookieParser = require('koa-cookie');
+const cookieSession = require('koa-session');
+const bodyParser = require('koa-bodyparser');
+const serveStatic = require('koa-static');
+const cors = require('@koa/cors');
 
-var helmet = require('helmet');
+const helmet = require('koa-helmet');
 
-var logger = require('morgan');
-var rfs = require('rotating-file-stream');
+const logger = require('koa-morgan');
+const rfs = require('rotating-file-stream');
 
-var pageRouter = require('./router/page');
-var apiRouter = require('./router/api');
+// const pageRouter = require('./router/page');
+// const apiRouter = require('./router/api');
 
-var app = express();
+const app = new Koa()
 
 app.use(cookieSession({
-  name: global.config.cookieSession.name,
-  keys: global.config.cookieSession.keys
+  key: global.config.cookieSession.name,
+  // maxAge: 60*60*24
 }))
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyparser({
+  enableTypes:['json', 'form', 'text']
+}))
 app.use(cookieParser());
 app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(serveStatic(path.join(__dirname, '../imgData')));
@@ -39,27 +41,28 @@ app.use(helmet());
 // app.use(cors());
 
 //view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(views(path.join(__dirname, 'views'), {
+  map: {html: 'ejs' }
+}));
 
 //set logs
-var generator = () => {
-  var time = global.help.dayjs().format('YYYY-MM-DD');
+const generator = () => {
+  let time = global.help.dayjs().format('YYYY-MM-DD');
   return `${time}.log`;
 };
-var accessLogStream = rfs.createStream(generator, {
+const accessLogStream = rfs.createStream(generator, {
   size: '100M',
   interval: '1d', // rotate daily
   path: path.join(__dirname, '../logs/http')
 })
 app.use(logger('combined',{stream:accessLogStream}));
 
-app.use('/', pageRouter);
-app.use('/api', global.middleware.auth, apiRouter);
+// app.use(pageRouter.routes(), pageRouter.allowedMethods())
+// app.use(global.middleware.auth,apiRouter.routes(), apiRouter.allowedMethods())
 
-app.use((req, res, next) => {
-  var err = new global.help.httpCode.NotFound();
-  next(err);
+app.use(async (ctx, next) => {
+  let err = new global.help.httpCode.NotFound();
+  await next(err);
 });
 
 app.use(global.middleware.catchError)

@@ -21,7 +21,7 @@ let fsUnlik = async(path) => {
 }
 
 module.exports = {
-	upload: async (req, res, next) => {		
+	upload: async (ctx, next) => {		
 		// token校验
 		let token = ''
 		if(req.body.token) {

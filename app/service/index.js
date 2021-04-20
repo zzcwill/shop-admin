@@ -10,12 +10,12 @@ const customerService = require('./customerService');
 
 module.exports = {
 	cacheService,
-	imgService,
+	// imgService,
 
 	userService,
-	menuService,
-	roleService,
-	orderService,
-	goodsService,
-	customerService
+	// menuService,
+	// roleService,
+	// orderService,
+	// goodsService,
+	// customerService
 }

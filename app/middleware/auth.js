@@ -2,22 +2,22 @@ const { Forbidden } = global.help.httpCode;
 const config = global.config;
 const { cacheService } = require('../service/');
 
-const auth = async (req, res, next) => {
-  if(config.noauthArr.indexOf(req.url) !== -1) {
+const auth = async (ctx, next) => {
+  if(config.noauthArr.indexOf(ctx.url) !== -1) {
     next();
     return
   }
 
   let token = ''
-  if(req.body.token) {
+  if(ctx.request.body.token) {
     token = req.body.token;
   }
 
-  if(req.query.token) {
+  if(ctx.request.query.token) {
     token = req.query.token;
   }
 
-  if(req.headers.token) {
+  if(ctx.request.headers.token) {
     token = req.headers.token;
   }
 
@@ -34,7 +34,7 @@ const auth = async (req, res, next) => {
     return
   }  
 
-  res.user = tokenCache;
+  ctx.user = tokenCache;
 
   next()
 }

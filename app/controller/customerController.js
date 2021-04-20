@@ -7,7 +7,7 @@ const { ParameterException } = global.help.httpCode;
 
 
 module.exports = {
-	list: async (req, res, next) => {
+	list: async (ctx, next) => {
 		let ruleData = {
 			page: [
 				{
@@ -49,7 +49,7 @@ module.exports = {
 
 		res.json(resOk(listData))		
 	},
-	add: async (req, res, next) => {
+	add: async (ctx, next) => {
 		let ruleData = {
 			name: [
 				{
@@ -77,7 +77,7 @@ module.exports = {
 
 		res.json(resOk(listData))			
 	},
-	update: async (req, res, next) => {
+	update: async (ctx, next) => {
 		let ruleData = {
 			id: [
 				{
@@ -107,7 +107,7 @@ module.exports = {
 			isOK: isOK
 		}))			
 	},
-	delete: async (req, res, next) => {
+	delete: async (ctx, next) => {
 		let ruleData = {
 			id: [
 				{

@@ -7,7 +7,7 @@ const logger = global.help.logger;
 const { HttpException, ParameterException } = global.help.httpCode;
 
 module.exports = {
-	list: async (req, res, next) => {
+	list: async (ctx, next) => {
 		let ruleData = {
 			page: [
 				{
@@ -49,7 +49,7 @@ module.exports = {
 
 		res.json(resOk(listData))		
 	},
-	add: async (req, res, next) => {
+	add: async (ctx, next) => {
 		let ruleData = {
 			customer_name: [
 				{
@@ -173,7 +173,7 @@ module.exports = {
 			isOK: result.isOK
 		}));		
 	},
-	update: async (req, res, next) => {
+	update: async (ctx, next) => {
 		let ruleData = {
 			id: [
 				{
@@ -203,7 +203,7 @@ module.exports = {
 			isOK: isOK
 		}))			
 	},
-	delete: async (req, res, next) => {
+	delete: async (ctx, next) => {
 		let ruleData = {
 			id: [
 				{

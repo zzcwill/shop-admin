@@ -10,7 +10,7 @@ const mq = require('../producer');
 const { resOk } = global.help.resData;
 
 module.exports = {
-	send: async (req, res, next) => {
+	send: async (ctx, next) => {
 		let ruleData = {
 			title: [
 				{
@@ -63,7 +63,7 @@ module.exports = {
 			},'邮件发送成功'))			
 		}
 	},
-	sendMq: async (req, res, next) => {
+	sendMq: async (ctx, next) => {
 		let ruleData = {
 			title: [
 				{

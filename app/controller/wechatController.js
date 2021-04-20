@@ -16,7 +16,7 @@ const appSecret = 'b21f5a2b7497bacd729537fbc135ab84';
 
 module.exports = {
 	// 获取微信小程序-session_key和openid, 和shop-admin授权登录
-	jscode2session: async (req, res, next) => {
+	jscode2session: async (ctx, next) => {
 		let ruleData = {
 			code: [
 				{

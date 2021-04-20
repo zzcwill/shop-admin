@@ -4,7 +4,7 @@ const config = require('config-lite')(path.resolve(__dirname, '../'));
 
 const consumer = require('./consumer');
 
-http.createServer(function(req, res){
+http.createServer(function(res){
 	res.end('here is mq');
 }).listen(config.mq.port);
 

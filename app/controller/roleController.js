@@ -7,7 +7,7 @@ const { ParameterException } = global.help.httpCode;
 
 
 module.exports = {
-	role: async (req, res, next) => {
+	role: async (ctx, next) => {
 		let ruleData = {
 			page: [
 				{
@@ -49,7 +49,7 @@ module.exports = {
 
 		res.json(resOk(listData))		
 	},
-	userRole: async (req, res, next) => {
+	userRole: async (ctx, next) => {
 		let ruleData = {
 			page: [
 				{

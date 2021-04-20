@@ -11,7 +11,7 @@ const { resOk } = global.help.resData;
 
 
 module.exports = {
-  get: async (req, res, next) => {
+  get: async (ctx, next) => {
     res.set('Content-Disposition', contentDisposition('excel.xlsx'));
 
     var url = path.resolve(__dirname, '../public/demo.xlsx');
@@ -30,7 +30,7 @@ module.exports = {
     res.end(buffer);
     
   },
-  get2: async (req, res, next) => {
+  get2: async (ctx, next) => {
     var url = '/demo.xlsx'
     res.redirect(url)
   }

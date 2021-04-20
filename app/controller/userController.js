@@ -9,7 +9,7 @@ const { AuthFailed, ParameterException } = global.help.httpCode;
 const { setPassWord, getSalt } = global.help.password;
 
 module.exports = {
-	login: async (req, res, next) => {
+	login: async (ctx, next) => {
 		let ruleData = {
 			username: [
 				{
@@ -71,7 +71,7 @@ module.exports = {
 
 		res.json(resOk(apidata))
 	},
-	logout: async (req, res, next) => {
+	logout: async (ctx, next) => {
 		let token = req.body.token;
 
 		let tokenCache = await cacheService.get(token)
@@ -83,11 +83,11 @@ module.exports = {
 
 		res.json(resOk({}, 10000, '注销成功'))
 	},
-	userInfo: async (req, res, next) => {
+	userInfo: async (ctx, next) => {
 		let apidata = lodash.pick(res.user, ['uid', 'username', 'level', 'isOnDuty', 'registerTime'])
 		res.json(resOk(apidata))
 	},
-	createUser: async (req, res, next) => {
+	createUser: async (ctx, next) => {
 		let ruleData = {
 			username: [
 				{
@@ -143,7 +143,7 @@ module.exports = {
 
 		res.json(resOk(apidata, 10000, '创建用户成功'))
 	},
-	changePassword: async (req, res, next) => {
+	changePassword: async (ctx, next) => {
 		let ruleData = {
 			password: [
 				{
