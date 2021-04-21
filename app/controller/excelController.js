@@ -27,7 +27,7 @@ module.exports = {
 
     const options = {'!cols': [{ wch: 25 }, { wch: 25 }, { wch: 25 }, { wch: 25 },{ wch: 25 } ]};    
     var buffer = xlsx.build([{ name: excelData[0].name, data: excelData[0].data }],options);
-    ctx.end(buffer);
+    ctx.body = buffer;
     
   },
   get2: async (ctx, next) => {

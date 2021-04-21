@@ -5,4 +5,4 @@ var random = function() {
 }
 
 var baseUrl = '/api/';
-var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoienpjIiwibGV2ZWwiOm51bGwsImlhdCI6MTYxODk3NjkxNiwiZXhwIjoxNjE5MDYzMzE2fQ.B53wTiCCCruDi1zh8JuVxS7Yd-Xmow0epKwqtmA10kQ';
+var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoienpjIiwibGV2ZWwiOm51bGwsImlhdCI6MTYxODk4MzA4MSwiZXhwIjoxNjE5MDY5NDgxfQ.q-VPwGv4p06H7NxJU9b7ZIkxTG7dNsGUwmWYEjJRzTs';

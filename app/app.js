@@ -21,8 +21,6 @@ const apiRouter = require('./router/api');
 
 const app = new Koa();
 
-app.use(global.middleware.catchError)
-
 app.keys = global.config.cookieSession.keys;
 app.use(cookieSession({
   key: global.config.cookieSession.name,
@@ -43,7 +41,9 @@ app.use(views(path.join(__dirname, 'views'), {
 }));
 
 //set logs
-// app.use(logger())
+app.use(global.middleware.loggerMiddleware)
+
+app.use(global.middleware.catchError)
 
 app.use(pageRouter.routes(), pageRouter.allowedMethods())
 app.use(apiRouter.routes(), apiRouter.allowedMethods())

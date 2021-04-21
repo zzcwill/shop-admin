@@ -23,18 +23,20 @@ let fsUnlik = async(path) => {
 module.exports = {
 	upload: async (ctx, next) => {		
 		// token校验
-		let token = ''
+		let token = '';
 		if(ctx.request.body.token) {
 			token = ctx.request.body.token;
 		}
 		// 无带token
 		if (!token) {
-			next( new Forbidden('需要传token') );
+			throw new Forbidden('需要传token');
+			await next();
 			return
 		}
 		let tokenCache = await cacheService.get(token);
 		if(!tokenCache) {
-			next( new Forbidden('无效的token') );
+			throw new Forbidden('无效的token');
+			await next();
 			return
 		}
 		ctx.user = tokenCache;
@@ -42,8 +44,9 @@ module.exports = {
 		let { mimetype, size, filename, path } = ctx.request.file;
 
 		if( size > config.uploadOption.maxSize) {
-			await fsUnlik(path)
-			next( new ParameterException('上传图片太大') );
+			await fsUnlik(path);
+			throw new ParameterException('上传图片太大');
+			await next();
 			return
 		}
 
@@ -56,9 +59,8 @@ module.exports = {
 
 		let imgData = await imgService.add(newImg)
 
-
-		if(ctx.request.file  !== undefined) {
-			ctx.boyd = resOk(
+		if(ctx.request.file !== undefined) {
+			ctx.body = resOk(
 				imgData,
 				10000,
 				'图片上传成功'

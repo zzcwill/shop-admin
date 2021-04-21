@@ -18,7 +18,7 @@ const page = async (ctx, next) => {
     ctx.request.query.pageSize = pageSize;
   }
 
-  next()
+  await next()
 }
 
 module.exports = page
