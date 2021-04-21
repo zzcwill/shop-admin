@@ -34,20 +34,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 		getData.page = lodash.toFinite(getData.page)
 		getData.pageSize = lodash.toFinite(getData.pageSize)
 
 		let listData = await customerService.list(getData);
 
-		res.json(resOk(listData))		
+		ctx.body = resOk(listData)
 	},
 	add: async (ctx, next) => {
 		let ruleData = {
@@ -64,18 +64,18 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let listData = await customerService.add(getData);
 
-		res.json(resOk(listData))			
+		ctx.body = resOk(listData)	
 	},
 	update: async (ctx, next) => {
 		let ruleData = {
@@ -92,20 +92,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let isOK = await customerService.update(getData);
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: isOK
-		}))			
+		})		
 	},
 	delete: async (ctx, next) => {
 		let ruleData = {
@@ -122,19 +122,19 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let isOK = await customerService.delete(getData);
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: isOK
-		}))		
+		})	
 	},	
 }

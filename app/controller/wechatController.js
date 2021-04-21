@@ -31,14 +31,14 @@ module.exports = {
 				}
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let toUrl = 'https://api.weixin.qq.com/sns/jscode2session';
 		let paramData = '?appid=' + appid + '&secret=' + appSecret +'&js_code=' + getData.code + '&grant_type=' + 'authorization_code'
@@ -62,7 +62,7 @@ module.exports = {
 		if(!user) {
 			apidata.isOk = 0;
 			apidata.openid = openid;
-			res.json(resOk(apidata));
+			ctx.body = resOk(apidata);
 			return
 		}
 
@@ -77,7 +77,7 @@ module.exports = {
 			apidata.isOk = 1;
 			apidata.user = tokenCahe;
 
-			res.json(resOk(apidata))
+			ctx.body = resOk(apidata);
 		}
 	}
 }

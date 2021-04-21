@@ -24,8 +24,8 @@ module.exports = {
 	upload: async (ctx, next) => {		
 		// token校验
 		let token = ''
-		if(req.body.token) {
-			token = req.body.token;
+		if(ctx.request.body.token) {
+			token = ctx.request.body.token;
 		}
 		// 无带token
 		if (!token) {
@@ -37,9 +37,9 @@ module.exports = {
 			next( new Forbidden('无效的token') );
 			return
 		}
-		res.user = tokenCache;
+		ctx.user = tokenCache;
 
-		let { mimetype, size, filename, path } = req.file;
+		let { mimetype, size, filename, path } = ctx.request.file;
 
 		if( size > config.uploadOption.maxSize) {
 			await fsUnlik(path)
@@ -50,19 +50,19 @@ module.exports = {
 		let newImg = {
 			file_type: mimetype,
 			file_size: size,
-			file_path: `${config.hostname}:${config.port}${config.uploadOption.uploadsUrl}${req.file.filename}`,
+			file_path: `${config.hostname}:${config.port}${config.uploadOption.uploadsUrl}${ctx.request.file.filename}`,
 			file_name: filename
 		};
 
 		let imgData = await imgService.add(newImg)
 
 
-		if(req.file  !== undefined) {
-			res.json(resOk(
+		if(ctx.request.file  !== undefined) {
+			ctx.boyd = resOk(
 				imgData,
 				10000,
 				'图片上传成功'
-			))
+			)
 		}
 	}
 }

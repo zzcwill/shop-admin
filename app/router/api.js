@@ -7,6 +7,8 @@ const { userController, imgController, excelController, emailController, menuCon
 
 const { imgUpload, auth, page } = global.middleware;
 
+router.use(auth)
+
 // user-about
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);

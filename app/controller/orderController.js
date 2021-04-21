@@ -34,20 +34,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 		getData.page = lodash.toFinite(getData.page)
 		getData.pageSize = lodash.toFinite(getData.pageSize)
 
 		let listData = await orderService.list(getData);
 
-		res.json(resOk(listData))		
+		ctx.body = resOk(listData)	
 	},
 	add: async (ctx, next) => {
 		let ruleData = {
@@ -125,14 +125,14 @@ module.exports = {
 				},
 			]														
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 		getData.order_code = getOrderCode()
 
 		console.info(getData)
@@ -156,7 +156,7 @@ module.exports = {
 
 		if(goodsStockList.indexOf(0) !== -1) {
 			let error = new ParameterException('商品库存不足')
-			next(error)			
+			throw error;			
 			return
 		}
 
@@ -165,13 +165,13 @@ module.exports = {
 
 		if(result.isOK === 0) {
 			let error = result.error
-			next(error)
+			throw error;
 			return			
 		}
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: result.isOK
-		}));		
+		});		
 	},
 	update: async (ctx, next) => {
 		let ruleData = {
@@ -188,20 +188,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let isOK = await orderService.update(getData);
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: isOK
-		}))			
+		});		
 	},
 	delete: async (ctx, next) => {
 		let ruleData = {
@@ -218,20 +218,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let order = await orderService.getOrderById(getData.id);
 
 		if (!order) {
 			let error = new ParameterException('该订单不存在')
-			next(error)
+			throw error;
 			return
 		}
 		
@@ -239,12 +239,12 @@ module.exports = {
 
 		if(result.isOK === 0) {
 			let error = result.error
-			next(error)
+			throw error;
 			return			
 		}
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: result.isOK
-		}));
+		});
 	},	
 }

@@ -34,20 +34,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 		getData.page = lodash.toFinite(getData.page)
 		getData.pageSize = lodash.toFinite(getData.pageSize)
 
 		let listData = await roleService.role(getData);
 
-		res.json(resOk(listData))		
+		ctx.body = resOk(listData)
 	},
 	userRole: async (ctx, next) => {
 		let ruleData = {
@@ -76,20 +76,20 @@ module.exports = {
 				},
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 		getData.page = lodash.toFinite(getData.page)
 		getData.pageSize = lodash.toFinite(getData.pageSize)
-		getData.uid = res.user.uid;
+		getData.uid = ctx.user.uid;
 
 		let listData = await roleService.userRole(getData);
 
-		res.json(resOk(listData))		
+		ctx.body = resOk(listData);	
 	},
 }

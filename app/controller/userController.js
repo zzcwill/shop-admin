@@ -37,27 +37,27 @@ module.exports = {
 				}
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let user = await userService.getUserByUsername(getData.username);
 
 		if (!user) {
 			let error = new AuthFailed('用户不存在')
-			next(error)
+			throw error;
 			return
 		}
 
 		let toPassword = setPassWord(getData.password, user.salt);
 		if (toPassword !== user.password) {
 			let error = new AuthFailed('密码不正确')
-			next(error)
+			throw error;
 			return
 		}
 
@@ -69,10 +69,10 @@ module.exports = {
 
 		apidata.token = token
 
-		res.json(resOk(apidata))
+		ctx.body = resOk(apidata)
 	},
 	logout: async (ctx, next) => {
-		let token = req.body.token;
+		let token = ctx.request.body.token;
 
 		let tokenCache = await cacheService.get(token)
 
@@ -81,11 +81,11 @@ module.exports = {
 		}
 
 
-		res.json(resOk({}, 10000, '注销成功'))
+		ctx.body = resOk({}, 10000, '注销成功')
 	},
 	userInfo: async (ctx, next) => {
-		let apidata = lodash.pick(res.user, ['uid', 'username', 'level', 'isOnDuty', 'registerTime'])
-		res.json(resOk(apidata))
+		let apidata = lodash.pick(ctx.user, ['uid', 'username', 'level', 'isOnDuty', 'registerTime'])
+		ctx.body = resOk(apidata);
 	},
 	createUser: async (ctx, next) => {
 		let ruleData = {
@@ -115,20 +115,20 @@ module.exports = {
 				}
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
 		let user = await userService.getUserByUsername(getData.username);
 
 		if (user) {
 			let error = new AuthFailed('用户已存在')
-			next(error)
+			throw error;
 			return
 		}
 
@@ -141,7 +141,7 @@ module.exports = {
 
 		let apidata = lodash.pick(newUser, ['uid', 'username', 'level', 'isOnDuty', 'registerTime']);
 
-		res.json(resOk(apidata, 10000, '创建用户成功'))
+		ctx.body = resOk(apidata, 10000, '创建用户成功')
 	},
 	changePassword: async (ctx, next) => {
 		let ruleData = {
@@ -172,20 +172,20 @@ module.exports = {
 				}
 			]			
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
+		let getData = ctx.request.body;
 
-		let user = await userService.getUserByUsername(res.user.username);
+		let user = await userService.getUserByUsername(ctx.user.username);
 
 		if (!user) {
 			let error = new AuthFailed('用户不存在')
-			next(error)
+			throw error;
 			return
 		}
 
@@ -193,7 +193,7 @@ module.exports = {
 		let toPassword = setPassWord(getData.password, user.salt);
 		if (toPassword !== user.password) {
 			let error = new AuthFailed('密码不正确')
-			next(error)
+			throw error;
 			return
 		}
 
@@ -206,8 +206,8 @@ module.exports = {
 			uid: user.uid
 		});
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: isOK
-		}))
+		})
 	}
 }

@@ -1,10 +1,10 @@
 const lodash = require('./lodash');
 
-let getAllParams = (req) => {
+let getAllParams = (ctx) => {
 	return {
-		body: req.body,
-		query: req.query
-		// headers: req.headers
+		body: ctx.request.body,
+		query: ctx.request.query
+		// headers: ctx.request.headers
 	}
 }
 

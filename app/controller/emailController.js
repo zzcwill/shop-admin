@@ -25,15 +25,15 @@ module.exports = {
 				}
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
-		let username = res.user.username;
+		let getData = ctx.request.body;
+		let username = ctx.user.username;
 
 		var option = {
 				service: config.eamil.service,
@@ -58,9 +58,9 @@ module.exports = {
 		});
 
 		if(data) {
-			res.json(resOk({
+			ctx.body = resOk({
 				isOK: 1
-			},'邮件发送成功'))			
+			},'邮件发送成功')			
 		}
 	},
 	sendMq: async (ctx, next) => {
@@ -78,20 +78,20 @@ module.exports = {
 				}
 			]
 		}
-		let msgParam = checkParam.check(req, ruleData)
+		let msgParam = checkParam.check(ctx, ruleData)
 		if (msgParam) {
 			let error = new ParameterException(msgParam)
-			next(error)
+			throw error;
 			return
 		}
 
-		let getData = req.body;
-		let username = res.user.username;
+		let getData = ctx.request.body;
+		let username = ctx.user.username;
 
 		await mq.eamilDLX(username)
 
-		res.json(resOk({
+		ctx.body = resOk({
 			isOK: 1
-		},'邮件发送成功'))
+		},'邮件发送成功')
 	}	
 }

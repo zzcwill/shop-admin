@@ -12,7 +12,7 @@ const { resOk } = global.help.resData;
 
 module.exports = {
   get: async (ctx, next) => {
-    res.set('Content-Disposition', contentDisposition('excel.xlsx'));
+    ctx.set('Content-Disposition', contentDisposition('excel.xlsx'));
 
     var url = path.resolve(__dirname, '../public/demo.xlsx');
 
@@ -27,11 +27,11 @@ module.exports = {
 
     const options = {'!cols': [{ wch: 25 }, { wch: 25 }, { wch: 25 }, { wch: 25 },{ wch: 25 } ]};    
     var buffer = xlsx.build([{ name: excelData[0].name, data: excelData[0].data }],options);
-    res.end(buffer);
+    ctx.end(buffer);
     
   },
   get2: async (ctx, next) => {
     var url = '/demo.xlsx'
-    res.redirect(url)
+    ctx.redirect(url)
   }
 }

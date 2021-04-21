@@ -10,13 +10,13 @@ const wechatController = require('./wechatController');
 
 module.exports = {
 	userController,
-	// imgController,
-	// excelController,
-	// emailController,
-	// menuController,
-	// roleController,
-	// orderController,
-	// customerController,
+	imgController,
+	excelController,
+	emailController,
+	menuController,
+	roleController,
+	orderController,
+	customerController,
 
-	// wechatController
+	wechatController
 }

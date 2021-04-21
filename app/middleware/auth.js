@@ -4,39 +4,41 @@ const { cacheService } = require('../service/');
 
 const auth = async (ctx, next) => {
   if(config.noauthArr.indexOf(ctx.url) !== -1) {
-    next();
+    await next();
     return
   }
 
   let token = ''
   if(ctx.request.body.token) {
-    token = req.body.token;
+    token = ctx.request.body.token;
   }
 
   if(ctx.request.query.token) {
-    token = req.query.token;
+    token = ctx.request.query.token;
   }
 
   if(ctx.request.headers.token) {
-    token = req.headers.token;
+    token = ctx.request.headers.token;
   }
 
   // 无带token
   if (!token) {
-    next( new Forbidden('需要传token') );
+    throw new Forbidden('需要传token');
+    await next();
     return
   }
 
   let tokenCache = await cacheService.get(token);
 
   if(!tokenCache) {
-    next( new Forbidden('无效的token') );
+    throw new Forbidden('无效的token');
+    await next();
     return
   }  
 
   ctx.user = tokenCache;
 
-  next()
+  await next();
 }
 
 module.exports = auth
