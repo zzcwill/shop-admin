@@ -34,7 +34,7 @@ router.get('/socket2', async (ctx) =>  {
 });
 
 router.get('/error', async (ctx) =>  {
-  next(new HttpException('test错误'))
+  throw new HttpException('test错误')
 });
 
 module.exports = router;
