@@ -47,6 +47,6 @@ module.exports = {
 				id: id
 			}
 		})
-    return isOk[0]		
+    return isOk	
 	},  
 }

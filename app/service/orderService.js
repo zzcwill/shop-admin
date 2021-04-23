@@ -49,7 +49,7 @@ module.exports = {
           transaction: t
         })
 
-        for( key = 0 ; key < shoesArr.length ; key++ ) {
+        for(let key = 0 ; key < shoesArr.length ; key++ ) {
           let item = shoesArr[key]
 
           let sunMoney = item.goods_num * item.goods_price;
@@ -117,7 +117,7 @@ module.exports = {
         raw:true
       }
     )
-    return isOk[0]
+    return isOk
   },
 	delete: async (search) => {
 		let { id } = search;
@@ -146,7 +146,7 @@ module.exports = {
           transaction: t
         }); 
         
-        for( key = 0 ; key < goodsList.length ; key++ ) {
+        for(let key = 0 ; key < goodsList.length ; key++ ) {
           let item = goodsList[key]
 
           let itemGoods = await Goods.findOne({
