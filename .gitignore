@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # 配置文件
-config/
+/config/dev.js
